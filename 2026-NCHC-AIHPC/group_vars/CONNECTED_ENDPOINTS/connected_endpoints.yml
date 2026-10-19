@@ -1,0 +1,44 @@
+---
+# Definition of connected endpoints in the fabric.
+servers:
+  # Name of the defined server.
+  - name: dc1-leaf1-server1
+    rack: Rack-01
+    adapters:
+      - endpoint_ports: [PCI1, PCI2]
+        switch_ports: [Ethernet1, Ethernet1]
+        switches: [dc1-leaf1a, dc1-leaf1b]
+        vlans: 10
+        native_vlan: 4092
+        mode: access
+        spanning_tree_portfast: edge
+        port_channel:
+          endpoint_port_channel: Bond1
+          mode: active
+
+  - name: dc1-leaf2-server1
+    rack: Rack-02
+    adapters:
+      - endpoint_ports: [PCI1, PCI2]
+        switch_ports: [Ethernet1, Ethernet1]
+        switches: [dc1-leaf2a, dc1-leaf2b]
+        vlans: 10
+        native_vlan: 4092
+        mode: access
+        spanning_tree_portfast: edge
+        port_channel:
+          mode: active
+
+  - name: dc1-leaf3-server1
+    rack: Rack-03
+    adapters:
+      - endpoint_ports: [PCI1, PCI2]
+        switch_ports: [Ethernet1, Ethernet1]
+        switches: [dc1-leaf3a, dc1-leaf3b]
+        vlans: 10
+        native_vlan: 4092
+        mode: access
+        spanning_tree_portfast: edge
+        port_channel:
+          mode: active
+       

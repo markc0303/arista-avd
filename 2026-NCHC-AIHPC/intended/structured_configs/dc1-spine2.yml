@@ -1,0 +1,275 @@
+aaa_root:
+  disabled: true
+clock:
+  timezone: Asia/Taipei
+config_end: true
+enable_password:
+  disabled: true
+eos_cli: load-interval default 1
+ethernet_interfaces:
+- name: Ethernet1/1
+  description: P2P_dc1-leaf1a_Ethernet50/1
+  shutdown: false
+  speed: 100g-2
+  mtu: 9214
+  ip_address: 10.255.255.2/31
+  metadata:
+    peer: dc1-leaf1a
+    peer_interface: Ethernet50/1
+    peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet1/3
+  description: P2P_dc1-leaf1b_Ethernet50/1
+  shutdown: false
+  speed: 100g-2
+  mtu: 9214
+  ip_address: 10.255.255.8/31
+  metadata:
+    peer: dc1-leaf1b
+    peer_interface: Ethernet50/1
+    peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet1/5
+  description: P2P_dc1-leaf2a_Ethernet50/1
+  shutdown: false
+  speed: 100g-2
+  mtu: 9214
+  ip_address: 10.255.255.14/31
+  metadata:
+    peer: dc1-leaf2a
+    peer_interface: Ethernet50/1
+    peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet1/7
+  description: P2P_dc1-leaf2b_Ethernet50/1
+  shutdown: false
+  speed: 100g-2
+  mtu: 9214
+  ip_address: 10.255.255.20/31
+  metadata:
+    peer: dc1-leaf2b
+    peer_interface: Ethernet50/1
+    peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet2/1
+  description: P2P_dc1-leaf3a_Ethernet50/1
+  shutdown: false
+  speed: 100g-2
+  mtu: 9214
+  ip_address: 10.255.255.26/31
+  metadata:
+    peer: dc1-leaf3a
+    peer_interface: Ethernet50/1
+    peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet2/3
+  description: P2P_dc1-leaf3b_Ethernet50/1
+  shutdown: false
+  speed: 100g-2
+  mtu: 9214
+  ip_address: 10.255.255.32/31
+  metadata:
+    peer: dc1-leaf3b
+    peer_interface: Ethernet50/1
+    peer_type: l3leaf
+  switchport:
+    enabled: false
+hostname: dc1-spine2
+ip_domain_lookup:
+  source_interfaces:
+  - name: Management1
+    vrf: MGMT
+ip_name_server:
+  vrfs:
+  - name: MGMT
+    servers:
+    - ip_address: 192.168.1.1
+ip_routing: true
+local_users:
+- name: admin
+  privilege: 15
+  role: network-admin
+  sha512_password: $6$hRPpt0mRKg1IbLxq$zuZlB/ozlYBXH6ObqfpWavwOnVRwRJMb5tL/PjjXWUdG0osH2RadZBsPvUDUiqP8DAJ34E4hPky5xAhzvkMH40
+- name: arista
+  privilege: 15
+  role: network-admin
+  sha512_password: $6$GX5WBIf4Gt/N8VVV$sJGc.25dcxHjMa5DiyFd/BQEs/olKOzvyHiELq0HYFJlc905Fet16XF3lbNBDllpldRlRU0q27SQm4dsg7f9h/
+loopback_interfaces:
+- name: Loopback0
+  description: ROUTER_ID
+  shutdown: false
+  ip_address: 10.255.0.2/32
+management_api_http:
+  enable_https: true
+  enable_vrfs:
+  - name: MGMT
+management_interfaces:
+- name: Management1
+  description: OOB_MANAGEMENT
+  shutdown: false
+  vrf: MGMT
+  ip_address: 172.16.93.12/24
+  type: oob
+  gateway: 172.16.93.1
+metadata:
+  is_deployed: true
+  platform: 7060X5
+  fabric_name: FABRIC
+ntp:
+  local_interface:
+    name: Management1
+    vrf: MGMT
+  servers:
+  - name: 0.pool.ntp.org
+    preferred: true
+  vrf: MGMT
+prefix_lists:
+- name: PL-LOOPBACKS-EVPN-OVERLAY
+  sequence_numbers:
+  - sequence: 10
+    action: permit 10.255.0.0/27 eq 32
+route_maps:
+- name: RM-CONN-2-BGP
+  sequence_numbers:
+  - sequence: 10
+    type: permit
+    match:
+    - ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+router_bfd:
+  multihop:
+    interval: 300
+    min_rx: 300
+    multiplier: 3
+router_bgp:
+  as: '65100'
+  router_id: 10.255.0.2
+  maximum_paths:
+    paths: 4
+  updates:
+    wait_install: true
+  bgp:
+    default:
+      ipv4_unicast: false
+  peer_groups:
+  - name: IPv4-UNDERLAY-PEERS
+    metadata:
+      type: ipv4
+    send_community: all
+    maximum_routes: 256000
+  - name: EVPN-OVERLAY-PEERS
+    metadata:
+      type: evpn
+    next_hop_unchanged: true
+    update_source: Loopback0
+    bfd: true
+    ebgp_multihop: 3
+    send_community: all
+    maximum_routes: 0
+  neighbors:
+  - ip_address: 10.255.255.3
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65101'
+    metadata:
+      peer: dc1-leaf1a
+    description: dc1-leaf1a_Ethernet50/1
+  - ip_address: 10.255.255.9
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65101'
+    metadata:
+      peer: dc1-leaf1b
+    description: dc1-leaf1b_Ethernet50/1
+  - ip_address: 10.255.255.15
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65102'
+    metadata:
+      peer: dc1-leaf2a
+    description: dc1-leaf2a_Ethernet50/1
+  - ip_address: 10.255.255.21
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65102'
+    metadata:
+      peer: dc1-leaf2b
+    description: dc1-leaf2b_Ethernet50/1
+  - ip_address: 10.255.255.27
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65103'
+    metadata:
+      peer: dc1-leaf3a
+    description: dc1-leaf3a_Ethernet50/1
+  - ip_address: 10.255.255.33
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65103'
+    metadata:
+      peer: dc1-leaf3b
+    description: dc1-leaf3b_Ethernet50/1
+  - ip_address: 10.255.0.4
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65101'
+    metadata:
+      peer: dc1-leaf1a
+    description: dc1-leaf1a_Loopback0
+  - ip_address: 10.255.0.5
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65101'
+    metadata:
+      peer: dc1-leaf1b
+    description: dc1-leaf1b_Loopback0
+  - ip_address: 10.255.0.6
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65102'
+    metadata:
+      peer: dc1-leaf2a
+    description: dc1-leaf2a_Loopback0
+  - ip_address: 10.255.0.7
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65102'
+    metadata:
+      peer: dc1-leaf2b
+    description: dc1-leaf2b_Loopback0
+  - ip_address: 10.255.0.8
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65103'
+    metadata:
+      peer: dc1-leaf3a
+    description: dc1-leaf3a_Loopback0
+  - ip_address: 10.255.0.9
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65103'
+    metadata:
+      peer: dc1-leaf3b
+    description: dc1-leaf3b_Loopback0
+  redistribute:
+    connected:
+      enabled: true
+      route_map: RM-CONN-2-BGP
+  address_family_evpn:
+    peer_groups:
+    - name: EVPN-OVERLAY-PEERS
+      activate: true
+  address_family_ipv4:
+    peer_groups:
+    - name: IPv4-UNDERLAY-PEERS
+      activate: true
+    - name: EVPN-OVERLAY-PEERS
+      activate: false
+service_routing_protocols_model: multi-agent
+spanning_tree:
+  mode: none
+static_routes:
+- vrf: MGMT
+  prefix: 0.0.0.0/0
+  next_hop: 172.16.93.1
+transceiver_qsfp_default_mode_4x10: true
+vlan_internal_order:
+  allocation: ascending
+  range:
+    beginning: 1006
+    ending: 1199
+vrfs:
+- name: MGMT
+  ip_routing: false

@@ -1,0 +1,28 @@
+---
+type: spine
+spine:
+  defaults:
+    loopback_ipv4_pool: 10.255.0.0/27
+    # Autonous System Number for BGP
+    bgp_as: 65100
+    raw_eos_cli: load-interval default 1 
+  # Define variables per node
+    # structured_config:
+    #   ethernet_interfaces:
+    #     - name: Ethernet55/1
+    #       speed: forced 10full
+    #     - name: Ethernet56/1
+    #       speed: forced 10full   
+  nodes:
+    - name: dc1-spine1
+      id: 1
+      mgmt_ip: 172.16.93.11/24 
+      platform: 7060X5      
+    - name: dc1-spine2
+      id: 2
+      mgmt_ip: 172.16.93.12/24
+      platform: 7060X5
+    - name: dc1-spine3
+      id: 3
+      mgmt_ip: 172.16.93.13/24      
+      platform: 7060X5
