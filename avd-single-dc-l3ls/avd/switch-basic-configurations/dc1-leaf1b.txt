@@ -1,0 +1,12 @@
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$hRPpt0mRKg1IbLxq$zuZlB/ozlYBXH6ObqfpWavwOnVRwRJMb5tL/PjjXWUdG0osH2RadZBsPvUDUiqP8DAJ34E4hPky5xAhzvkMH40
+username arista privilege 15 role network-admin secret sha512 $6$GX5WBIf4Gt/N8VVV$sJGc.25dcxHjMa5DiyFd/BQEs/olKOzvyHiELq0HYFJlc905Fet16XF3lbNBDllpldRlRU0q27SQm4dsg7f9h/
+!
+management api http-commands
+   no shutdown
+   !
+interface Management0
+   ip address 172.16.93.102/24
+!
+ip routing

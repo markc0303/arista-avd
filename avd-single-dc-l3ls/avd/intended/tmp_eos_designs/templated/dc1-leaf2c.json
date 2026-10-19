@@ -1,0 +1,1119 @@
+{
+    "avd_structured_config_file_format": "yml",
+    "avd_vault_id": null,
+    "eos_designs_keep_tmp_files": false,
+    "eos_designs_validation_configuration": {
+        "warn_eos_config_keys": true
+    },
+    "root_dir": "/home/mark/avd/avd-single-dc-l3ls/avd",
+    "documentation_dir_name": "documentation",
+    "documentation_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/documentation",
+    "fabric_dir_name": "fabric",
+    "fabric_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/documentation/fabric",
+    "output_dir_name": "intended",
+    "output_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended",
+    "structured_dir_name": "structured_configs",
+    "structured_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/structured_configs",
+    "eos_designs_tmp_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/tmp_eos_designs",
+    "eos_cli_config_gen_keep_tmp_files": false,
+    "devices_dir_name": "devices",
+    "devices_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/documentation/devices",
+    "eos_config_dir_name": "configs",
+    "eos_config_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/configs",
+    "eos_cli_config_gen_tmp_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/tmp_eos_cli_config_gen",
+    "ansible_connection": "ansible.netcommon.httpapi",
+    "ansible_network_os": "arista.eos.eos",
+    "ansible_user": "arista",
+    "ansible_password": "arista",
+    "ansible_become": true,
+    "ansible_become_method": "enable",
+    "ansible_httpapi_use_ssl": true,
+    "ansible_httpapi_validate_certs": false,
+    "fabric_name": "FABRIC",
+    "eos_designs_documentation": {
+        "topology_csv": true,
+        "p2p_links_csv": true
+    },
+    "underlay_routing_protocol": "ebgp",
+    "overlay_routing_protocol": "ebgp",
+    "aaa_settings": {
+        "local_users": [
+            {
+                "name": "admin",
+                "privilege": 15,
+                "role": "network-admin",
+                "sha512_password": "$6$hRPpt0mRKg1IbLxq$zuZlB/ozlYBXH6ObqfpWavwOnVRwRJMb5tL/PjjXWUdG0osH2RadZBsPvUDUiqP8DAJ34E4hPky5xAhzvkMH40"
+            },
+            {
+                "name": "arista",
+                "privilege": 15,
+                "role": "network-admin",
+                "sha512_password": "$6$GX5WBIf4Gt/N8VVV$sJGc.25dcxHjMa5DiyFd/BQEs/olKOzvyHiELq0HYFJlc905Fet16XF3lbNBDllpldRlRU0q27SQm4dsg7f9h/"
+            }
+        ]
+    },
+    "bgp_peer_groups": {
+        "evpn_overlay_peers": {
+            "password": "Q4fqtbqcZ7oQuKfuWtNGRQ=="
+        },
+        "ipv4_underlay_peers": {
+            "password": "7x4B4rnJhZB438m9+BrBfQ=="
+        },
+        "mlag_ipv4_underlay_peer": {
+            "password": "4b21pAdCvWeAqpcKDFMdWw=="
+        }
+    },
+    "default_interfaces": [
+        {
+            "types": [
+                "spine"
+            ],
+            "platforms": [
+                "default"
+            ],
+            "uplink_interfaces": [
+                "Ethernet1-2"
+            ],
+            "downlink_interfaces": [
+                "Ethernet1-8"
+            ]
+        },
+        {
+            "types": [
+                "l3leaf"
+            ],
+            "platforms": [
+                "default"
+            ],
+            "uplink_interfaces": [
+                "Ethernet1-2"
+            ],
+            "downlink_interfaces": [
+                "Ethernet8"
+            ]
+        },
+        {
+            "types": [
+                "l2leaf"
+            ],
+            "platforms": [
+                "default"
+            ],
+            "uplink_interfaces": [
+                "Ethernet1-2"
+            ]
+        }
+    ],
+    "mgmt_interface": "Management0",
+    "mgmt_interface_vrf": "MGMT",
+    "management_eapi": {
+        "enabled": true
+    },
+    "dns_settings": {
+        "servers": [
+            {
+                "ip_address": "192.168.1.1"
+            }
+        ]
+    },
+    "ntp_settings": {
+        "server_vrf": "use_mgmt_interface_vrf",
+        "servers": [
+            {
+                "name": "0.pool.ntp.org"
+            }
+        ]
+    },
+    "timezone": "Asia/Taipei",
+    "bgp_update_wait_install": false,
+    "bgp_update_wait_for_convergence": false,
+    "mgmt_gateway": "172.16.93.1",
+    "type": "l2leaf",
+    "l2leaf": {
+        "defaults": {
+            "spanning_tree_mode": "mstp"
+        },
+        "node_groups": [
+            {
+                "group": "DC1_L2_LEAF1",
+                "uplink_switches": [
+                    "dc1-leaf1a",
+                    "dc1-leaf1b"
+                ],
+                "nodes": [
+                    {
+                        "name": "dc1-leaf1c",
+                        "id": 1,
+                        "mgmt_ip": "172.16.93.151/24"
+                    }
+                ]
+            },
+            {
+                "group": "DC1_L2_LEAF2",
+                "uplink_switches": [
+                    "dc1-leaf2a",
+                    "dc1-leaf2b"
+                ],
+                "nodes": [
+                    {
+                        "name": "dc1-leaf2c",
+                        "id": 1,
+                        "mgmt_ip": "172.16.93.152/24"
+                    }
+                ]
+            },
+            {
+                "group": "DC1_L2_LEAF3",
+                "uplink_switches": [
+                    "dc1-leaf3a",
+                    "dc1-leaf3b"
+                ],
+                "nodes": [
+                    {
+                        "name": "dc1-leaf3c",
+                        "id": 1,
+                        "mgmt_ip": "172.16.93.153/24"
+                    }
+                ]
+            }
+        ]
+    },
+    "inventory_file": "/home/mark/avd/avd-single-dc-l3ls/avd/inventory.yml",
+    "inventory_dir": "/home/mark/avd/avd-single-dc-l3ls/avd",
+    "ansible_host": "172.16.93.152",
+    "inventory_hostname": "dc1-leaf2c",
+    "inventory_hostname_short": "dc1-leaf2c",
+    "group_names": [
+        "DC1",
+        "DC1_L2_LEAFS",
+        "FABRIC"
+    ],
+    "ansible_facts": {},
+    "role_schema_dir_name": "schemas",
+    "role_schema_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas",
+    "role_schema_file_name": "eos_designs.schema.yml",
+    "role_schema_path": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/eos_designs.schema.yml",
+    "role_schema_fragments_dir_name": "schema_fragments",
+    "role_schema_fragments_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/schema_fragments",
+    "role_schema_fragments_file_glob": "*.schema.yml",
+    "role_schema_fragments_glob": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/schema_fragments/*.schema.yml",
+    "role_documentation_dir_name": "docs",
+    "role_documentation_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/docs",
+    "role_schema_docs_fragments_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/doc_fragments",
+    "avd_requirements": {
+        "changed": false,
+        "failed": false
+    },
+    "playbook_dir": "/home/mark/avd/avd-single-dc-l3ls/avd",
+    "ansible_playbook_python": "/home/mark/.venv/bin/python",
+    "ansible_config_file": "/home/mark/avd/avd-single-dc-l3ls/avd/ansible.cfg",
+    "ansible_role_names": [
+        "arista.avd.eos_cli_config_gen",
+        "arista.avd.eos_designs"
+    ],
+    "ansible_play_role_names": [
+        "arista.avd.eos_designs",
+        "arista.avd.eos_cli_config_gen"
+    ],
+    "ansible_dependent_role_names": [],
+    "role_names": [
+        "arista.avd.eos_designs",
+        "arista.avd.eos_cli_config_gen"
+    ],
+    "ansible_play_name": "Build Configurations and Documentation",
+    "role_name": "eos_designs",
+    "role_path": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs",
+    "role_uuid": "bc241126-6577-82b1-2971-000000000012",
+    "ansible_collection_name": "arista.avd",
+    "ansible_role_name": "arista.avd.eos_designs",
+    "groups": {
+        "all": [
+            "dc1-spine1",
+            "dc1-spine2",
+            "dc1-leaf1c",
+            "dc1-leaf2c",
+            "dc1-leaf3c",
+            "dc1-leaf1a",
+            "dc1-leaf1b",
+            "dc1-leaf2a",
+            "dc1-leaf2b",
+            "dc1-leaf3a",
+            "dc1-leaf3b"
+        ],
+        "ungrouped": [],
+        "FABRIC": [
+            "dc1-spine1",
+            "dc1-spine2",
+            "dc1-leaf1c",
+            "dc1-leaf2c",
+            "dc1-leaf3c",
+            "dc1-leaf1a",
+            "dc1-leaf1b",
+            "dc1-leaf2a",
+            "dc1-leaf2b",
+            "dc1-leaf3a",
+            "dc1-leaf3b"
+        ],
+        "DC1": [
+            "dc1-spine1",
+            "dc1-spine2",
+            "dc1-leaf1c",
+            "dc1-leaf2c",
+            "dc1-leaf3c",
+            "dc1-leaf1a",
+            "dc1-leaf1b",
+            "dc1-leaf2a",
+            "dc1-leaf2b",
+            "dc1-leaf3a",
+            "dc1-leaf3b"
+        ],
+        "DC1_SPINES": [
+            "dc1-spine1",
+            "dc1-spine2"
+        ],
+        "DC1_L3_LEAFS": [
+            "dc1-leaf1a",
+            "dc1-leaf1b",
+            "dc1-leaf2a",
+            "dc1-leaf2b",
+            "dc1-leaf3a",
+            "dc1-leaf3b"
+        ],
+        "DC1_LEAF1": [
+            "dc1-leaf1a",
+            "dc1-leaf1b"
+        ],
+        "DC1_LEAF2": [
+            "dc1-leaf2a",
+            "dc1-leaf2b"
+        ],
+        "DC1_LEAF3": [
+            "dc1-leaf3a",
+            "dc1-leaf3b"
+        ],
+        "DC1_L2_LEAFS": [
+            "dc1-leaf1c",
+            "dc1-leaf2c",
+            "dc1-leaf3c"
+        ]
+    },
+    "ansible_play_hosts_all": [
+        "dc1-spine1",
+        "dc1-spine2",
+        "dc1-leaf1c",
+        "dc1-leaf2c",
+        "dc1-leaf3c",
+        "dc1-leaf1a",
+        "dc1-leaf1b",
+        "dc1-leaf2a",
+        "dc1-leaf2b",
+        "dc1-leaf3a",
+        "dc1-leaf3b"
+    ],
+    "ansible_play_hosts": [
+        "dc1-spine1",
+        "dc1-spine2",
+        "dc1-leaf1c",
+        "dc1-leaf2c",
+        "dc1-leaf3c",
+        "dc1-leaf1a",
+        "dc1-leaf1b",
+        "dc1-leaf2a",
+        "dc1-leaf2b",
+        "dc1-leaf3a",
+        "dc1-leaf3b"
+    ],
+    "ansible_play_batch": [
+        "dc1-spine1",
+        "dc1-spine2",
+        "dc1-leaf1c",
+        "dc1-leaf2c",
+        "dc1-leaf3c",
+        "dc1-leaf1a",
+        "dc1-leaf1b",
+        "dc1-leaf2a",
+        "dc1-leaf2b",
+        "dc1-leaf3a",
+        "dc1-leaf3b"
+    ],
+    "play_hosts": [
+        "dc1-spine1",
+        "dc1-spine2",
+        "dc1-leaf1c",
+        "dc1-leaf2c",
+        "dc1-leaf3c",
+        "dc1-leaf1a",
+        "dc1-leaf1b",
+        "dc1-leaf2a",
+        "dc1-leaf2b",
+        "dc1-leaf3a",
+        "dc1-leaf3b"
+    ],
+    "ansible_version": {
+        "string": "2.21.4",
+        "full": "2.21.4",
+        "major": 2,
+        "minor": 21,
+        "revision": 4
+    },
+    "ansible_check_mode": true,
+    "ansible_diff_mode": false,
+    "ansible_forks": 5,
+    "ansible_inventory_sources": [
+        "/home/mark/avd/avd-single-dc-l3ls/avd/inventory.yml"
+    ],
+    "ansible_skip_tags": [],
+    "ansible_run_tags": [
+        "all"
+    ],
+    "ansible_verbosity": 1,
+    "environment": [
+        {}
+    ],
+    "vars": {
+        "avd_structured_config_file_format": "yml",
+        "avd_vault_id": null,
+        "eos_designs_keep_tmp_files": false,
+        "eos_designs_validation_configuration": {
+            "warn_eos_config_keys": true
+        },
+        "root_dir": "/home/mark/avd/avd-single-dc-l3ls/avd",
+        "documentation_dir_name": "documentation",
+        "documentation_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/documentation",
+        "fabric_dir_name": "fabric",
+        "fabric_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/documentation/fabric",
+        "output_dir_name": "intended",
+        "output_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended",
+        "structured_dir_name": "structured_configs",
+        "structured_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/structured_configs",
+        "eos_designs_tmp_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/tmp_eos_designs",
+        "eos_cli_config_gen_keep_tmp_files": false,
+        "devices_dir_name": "devices",
+        "devices_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/documentation/devices",
+        "eos_config_dir_name": "configs",
+        "eos_config_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/configs",
+        "eos_cli_config_gen_tmp_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/tmp_eos_cli_config_gen",
+        "ansible_connection": "ansible.netcommon.httpapi",
+        "ansible_network_os": "arista.eos.eos",
+        "ansible_user": "arista",
+        "ansible_password": "arista",
+        "ansible_become": true,
+        "ansible_become_method": "enable",
+        "ansible_httpapi_use_ssl": true,
+        "ansible_httpapi_validate_certs": false,
+        "fabric_name": "FABRIC",
+        "eos_designs_documentation": {
+            "topology_csv": true,
+            "p2p_links_csv": true
+        },
+        "underlay_routing_protocol": "ebgp",
+        "overlay_routing_protocol": "ebgp",
+        "aaa_settings": {
+            "local_users": [
+                {
+                    "name": "admin",
+                    "privilege": 15,
+                    "role": "network-admin",
+                    "sha512_password": "$6$hRPpt0mRKg1IbLxq$zuZlB/ozlYBXH6ObqfpWavwOnVRwRJMb5tL/PjjXWUdG0osH2RadZBsPvUDUiqP8DAJ34E4hPky5xAhzvkMH40"
+                },
+                {
+                    "name": "arista",
+                    "privilege": 15,
+                    "role": "network-admin",
+                    "sha512_password": "$6$GX5WBIf4Gt/N8VVV$sJGc.25dcxHjMa5DiyFd/BQEs/olKOzvyHiELq0HYFJlc905Fet16XF3lbNBDllpldRlRU0q27SQm4dsg7f9h/"
+                }
+            ]
+        },
+        "bgp_peer_groups": {
+            "evpn_overlay_peers": {
+                "password": "Q4fqtbqcZ7oQuKfuWtNGRQ=="
+            },
+            "ipv4_underlay_peers": {
+                "password": "7x4B4rnJhZB438m9+BrBfQ=="
+            },
+            "mlag_ipv4_underlay_peer": {
+                "password": "4b21pAdCvWeAqpcKDFMdWw=="
+            }
+        },
+        "default_interfaces": [
+            {
+                "types": [
+                    "spine"
+                ],
+                "platforms": [
+                    "default"
+                ],
+                "uplink_interfaces": [
+                    "Ethernet1-2"
+                ],
+                "downlink_interfaces": [
+                    "Ethernet1-8"
+                ]
+            },
+            {
+                "types": [
+                    "l3leaf"
+                ],
+                "platforms": [
+                    "default"
+                ],
+                "uplink_interfaces": [
+                    "Ethernet1-2"
+                ],
+                "downlink_interfaces": [
+                    "Ethernet8"
+                ]
+            },
+            {
+                "types": [
+                    "l2leaf"
+                ],
+                "platforms": [
+                    "default"
+                ],
+                "uplink_interfaces": [
+                    "Ethernet1-2"
+                ]
+            }
+        ],
+        "mgmt_interface": "Management0",
+        "mgmt_interface_vrf": "MGMT",
+        "management_eapi": {
+            "enabled": true
+        },
+        "dns_settings": {
+            "servers": [
+                {
+                    "ip_address": "192.168.1.1"
+                }
+            ]
+        },
+        "ntp_settings": {
+            "server_vrf": "use_mgmt_interface_vrf",
+            "servers": [
+                {
+                    "name": "0.pool.ntp.org"
+                }
+            ]
+        },
+        "timezone": "Asia/Taipei",
+        "bgp_update_wait_install": false,
+        "bgp_update_wait_for_convergence": false,
+        "mgmt_gateway": "172.16.93.1",
+        "type": "l2leaf",
+        "l2leaf": {
+            "defaults": {
+                "spanning_tree_mode": "mstp"
+            },
+            "node_groups": [
+                {
+                    "group": "DC1_L2_LEAF1",
+                    "uplink_switches": [
+                        "dc1-leaf1a",
+                        "dc1-leaf1b"
+                    ],
+                    "nodes": [
+                        {
+                            "name": "dc1-leaf1c",
+                            "id": 1,
+                            "mgmt_ip": "172.16.93.151/24"
+                        }
+                    ]
+                },
+                {
+                    "group": "DC1_L2_LEAF2",
+                    "uplink_switches": [
+                        "dc1-leaf2a",
+                        "dc1-leaf2b"
+                    ],
+                    "nodes": [
+                        {
+                            "name": "dc1-leaf2c",
+                            "id": 1,
+                            "mgmt_ip": "172.16.93.152/24"
+                        }
+                    ]
+                },
+                {
+                    "group": "DC1_L2_LEAF3",
+                    "uplink_switches": [
+                        "dc1-leaf3a",
+                        "dc1-leaf3b"
+                    ],
+                    "nodes": [
+                        {
+                            "name": "dc1-leaf3c",
+                            "id": 1,
+                            "mgmt_ip": "172.16.93.153/24"
+                        }
+                    ]
+                }
+            ]
+        },
+        "inventory_file": "/home/mark/avd/avd-single-dc-l3ls/avd/inventory.yml",
+        "inventory_dir": "/home/mark/avd/avd-single-dc-l3ls/avd",
+        "ansible_host": "172.16.93.152",
+        "inventory_hostname": "dc1-leaf2c",
+        "inventory_hostname_short": "dc1-leaf2c",
+        "group_names": [
+            "DC1",
+            "DC1_L2_LEAFS",
+            "FABRIC"
+        ],
+        "ansible_facts": {},
+        "role_schema_dir_name": "schemas",
+        "role_schema_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas",
+        "role_schema_file_name": "eos_designs.schema.yml",
+        "role_schema_path": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/eos_designs.schema.yml",
+        "role_schema_fragments_dir_name": "schema_fragments",
+        "role_schema_fragments_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/schema_fragments",
+        "role_schema_fragments_file_glob": "*.schema.yml",
+        "role_schema_fragments_glob": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/schema_fragments/*.schema.yml",
+        "role_documentation_dir_name": "docs",
+        "role_documentation_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/docs",
+        "role_schema_docs_fragments_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/doc_fragments",
+        "avd_requirements": {
+            "changed": false,
+            "failed": false
+        },
+        "playbook_dir": "/home/mark/avd/avd-single-dc-l3ls/avd",
+        "ansible_playbook_python": "/home/mark/.venv/bin/python",
+        "ansible_config_file": "/home/mark/avd/avd-single-dc-l3ls/avd/ansible.cfg",
+        "ansible_role_names": [
+            "arista.avd.eos_cli_config_gen",
+            "arista.avd.eos_designs"
+        ],
+        "ansible_play_role_names": [
+            "arista.avd.eos_designs",
+            "arista.avd.eos_cli_config_gen"
+        ],
+        "ansible_dependent_role_names": [],
+        "role_names": [
+            "arista.avd.eos_designs",
+            "arista.avd.eos_cli_config_gen"
+        ],
+        "ansible_play_name": "Build Configurations and Documentation",
+        "role_name": "eos_designs",
+        "role_path": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs",
+        "role_uuid": "bc241126-6577-82b1-2971-000000000012",
+        "ansible_collection_name": "arista.avd",
+        "ansible_role_name": "arista.avd.eos_designs",
+        "groups": {
+            "all": [
+                "dc1-spine1",
+                "dc1-spine2",
+                "dc1-leaf1c",
+                "dc1-leaf2c",
+                "dc1-leaf3c",
+                "dc1-leaf1a",
+                "dc1-leaf1b",
+                "dc1-leaf2a",
+                "dc1-leaf2b",
+                "dc1-leaf3a",
+                "dc1-leaf3b"
+            ],
+            "ungrouped": [],
+            "FABRIC": [
+                "dc1-spine1",
+                "dc1-spine2",
+                "dc1-leaf1c",
+                "dc1-leaf2c",
+                "dc1-leaf3c",
+                "dc1-leaf1a",
+                "dc1-leaf1b",
+                "dc1-leaf2a",
+                "dc1-leaf2b",
+                "dc1-leaf3a",
+                "dc1-leaf3b"
+            ],
+            "DC1": [
+                "dc1-spine1",
+                "dc1-spine2",
+                "dc1-leaf1c",
+                "dc1-leaf2c",
+                "dc1-leaf3c",
+                "dc1-leaf1a",
+                "dc1-leaf1b",
+                "dc1-leaf2a",
+                "dc1-leaf2b",
+                "dc1-leaf3a",
+                "dc1-leaf3b"
+            ],
+            "DC1_SPINES": [
+                "dc1-spine1",
+                "dc1-spine2"
+            ],
+            "DC1_L3_LEAFS": [
+                "dc1-leaf1a",
+                "dc1-leaf1b",
+                "dc1-leaf2a",
+                "dc1-leaf2b",
+                "dc1-leaf3a",
+                "dc1-leaf3b"
+            ],
+            "DC1_LEAF1": [
+                "dc1-leaf1a",
+                "dc1-leaf1b"
+            ],
+            "DC1_LEAF2": [
+                "dc1-leaf2a",
+                "dc1-leaf2b"
+            ],
+            "DC1_LEAF3": [
+                "dc1-leaf3a",
+                "dc1-leaf3b"
+            ],
+            "DC1_L2_LEAFS": [
+                "dc1-leaf1c",
+                "dc1-leaf2c",
+                "dc1-leaf3c"
+            ]
+        },
+        "ansible_play_hosts_all": [
+            "dc1-spine1",
+            "dc1-spine2",
+            "dc1-leaf1c",
+            "dc1-leaf2c",
+            "dc1-leaf3c",
+            "dc1-leaf1a",
+            "dc1-leaf1b",
+            "dc1-leaf2a",
+            "dc1-leaf2b",
+            "dc1-leaf3a",
+            "dc1-leaf3b"
+        ],
+        "ansible_play_hosts": [
+            "dc1-spine1",
+            "dc1-spine2",
+            "dc1-leaf1c",
+            "dc1-leaf2c",
+            "dc1-leaf3c",
+            "dc1-leaf1a",
+            "dc1-leaf1b",
+            "dc1-leaf2a",
+            "dc1-leaf2b",
+            "dc1-leaf3a",
+            "dc1-leaf3b"
+        ],
+        "ansible_play_batch": [
+            "dc1-spine1",
+            "dc1-spine2",
+            "dc1-leaf1c",
+            "dc1-leaf2c",
+            "dc1-leaf3c",
+            "dc1-leaf1a",
+            "dc1-leaf1b",
+            "dc1-leaf2a",
+            "dc1-leaf2b",
+            "dc1-leaf3a",
+            "dc1-leaf3b"
+        ],
+        "play_hosts": [
+            "dc1-spine1",
+            "dc1-spine2",
+            "dc1-leaf1c",
+            "dc1-leaf2c",
+            "dc1-leaf3c",
+            "dc1-leaf1a",
+            "dc1-leaf1b",
+            "dc1-leaf2a",
+            "dc1-leaf2b",
+            "dc1-leaf3a",
+            "dc1-leaf3b"
+        ],
+        "ansible_version": {
+            "string": "2.21.4",
+            "full": "2.21.4",
+            "major": 2,
+            "minor": 21,
+            "revision": 4
+        },
+        "ansible_check_mode": true,
+        "ansible_diff_mode": false,
+        "ansible_forks": 5,
+        "ansible_inventory_sources": [
+            "/home/mark/avd/avd-single-dc-l3ls/avd/inventory.yml"
+        ],
+        "ansible_skip_tags": [],
+        "ansible_run_tags": [
+            "all"
+        ],
+        "ansible_verbosity": 1,
+        "environment": [
+            {}
+        ],
+        "vars": {
+            "avd_structured_config_file_format": "yml",
+            "avd_vault_id": null,
+            "eos_designs_keep_tmp_files": false,
+            "eos_designs_validation_configuration": {
+                "warn_eos_config_keys": true
+            },
+            "root_dir": "/home/mark/avd/avd-single-dc-l3ls/avd",
+            "documentation_dir_name": "documentation",
+            "documentation_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/documentation",
+            "fabric_dir_name": "fabric",
+            "fabric_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/documentation/fabric",
+            "output_dir_name": "intended",
+            "output_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended",
+            "structured_dir_name": "structured_configs",
+            "structured_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/structured_configs",
+            "eos_designs_tmp_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/tmp_eos_designs",
+            "eos_cli_config_gen_keep_tmp_files": false,
+            "devices_dir_name": "devices",
+            "devices_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/documentation/devices",
+            "eos_config_dir_name": "configs",
+            "eos_config_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/configs",
+            "eos_cli_config_gen_tmp_dir": "/home/mark/avd/avd-single-dc-l3ls/avd/intended/tmp_eos_cli_config_gen",
+            "ansible_connection": "ansible.netcommon.httpapi",
+            "ansible_network_os": "arista.eos.eos",
+            "ansible_user": "arista",
+            "ansible_password": "arista",
+            "ansible_become": true,
+            "ansible_become_method": "enable",
+            "ansible_httpapi_use_ssl": true,
+            "ansible_httpapi_validate_certs": false,
+            "fabric_name": "FABRIC",
+            "eos_designs_documentation": {
+                "topology_csv": true,
+                "p2p_links_csv": true
+            },
+            "underlay_routing_protocol": "ebgp",
+            "overlay_routing_protocol": "ebgp",
+            "aaa_settings": {
+                "local_users": [
+                    {
+                        "name": "admin",
+                        "privilege": 15,
+                        "role": "network-admin",
+                        "sha512_password": "$6$hRPpt0mRKg1IbLxq$zuZlB/ozlYBXH6ObqfpWavwOnVRwRJMb5tL/PjjXWUdG0osH2RadZBsPvUDUiqP8DAJ34E4hPky5xAhzvkMH40"
+                    },
+                    {
+                        "name": "arista",
+                        "privilege": 15,
+                        "role": "network-admin",
+                        "sha512_password": "$6$GX5WBIf4Gt/N8VVV$sJGc.25dcxHjMa5DiyFd/BQEs/olKOzvyHiELq0HYFJlc905Fet16XF3lbNBDllpldRlRU0q27SQm4dsg7f9h/"
+                    }
+                ]
+            },
+            "bgp_peer_groups": {
+                "evpn_overlay_peers": {
+                    "password": "Q4fqtbqcZ7oQuKfuWtNGRQ=="
+                },
+                "ipv4_underlay_peers": {
+                    "password": "7x4B4rnJhZB438m9+BrBfQ=="
+                },
+                "mlag_ipv4_underlay_peer": {
+                    "password": "4b21pAdCvWeAqpcKDFMdWw=="
+                }
+            },
+            "default_interfaces": [
+                {
+                    "types": [
+                        "spine"
+                    ],
+                    "platforms": [
+                        "default"
+                    ],
+                    "uplink_interfaces": [
+                        "Ethernet1-2"
+                    ],
+                    "downlink_interfaces": [
+                        "Ethernet1-8"
+                    ]
+                },
+                {
+                    "types": [
+                        "l3leaf"
+                    ],
+                    "platforms": [
+                        "default"
+                    ],
+                    "uplink_interfaces": [
+                        "Ethernet1-2"
+                    ],
+                    "downlink_interfaces": [
+                        "Ethernet8"
+                    ]
+                },
+                {
+                    "types": [
+                        "l2leaf"
+                    ],
+                    "platforms": [
+                        "default"
+                    ],
+                    "uplink_interfaces": [
+                        "Ethernet1-2"
+                    ]
+                }
+            ],
+            "mgmt_interface": "Management0",
+            "mgmt_interface_vrf": "MGMT",
+            "management_eapi": {
+                "enabled": true
+            },
+            "dns_settings": {
+                "servers": [
+                    {
+                        "ip_address": "192.168.1.1"
+                    }
+                ]
+            },
+            "ntp_settings": {
+                "server_vrf": "use_mgmt_interface_vrf",
+                "servers": [
+                    {
+                        "name": "0.pool.ntp.org"
+                    }
+                ]
+            },
+            "timezone": "Asia/Taipei",
+            "bgp_update_wait_install": false,
+            "bgp_update_wait_for_convergence": false,
+            "mgmt_gateway": "172.16.93.1",
+            "type": "l2leaf",
+            "l2leaf": {
+                "defaults": {
+                    "spanning_tree_mode": "mstp"
+                },
+                "node_groups": [
+                    {
+                        "group": "DC1_L2_LEAF1",
+                        "uplink_switches": [
+                            "dc1-leaf1a",
+                            "dc1-leaf1b"
+                        ],
+                        "nodes": [
+                            {
+                                "name": "dc1-leaf1c",
+                                "id": 1,
+                                "mgmt_ip": "172.16.93.151/24"
+                            }
+                        ]
+                    },
+                    {
+                        "group": "DC1_L2_LEAF2",
+                        "uplink_switches": [
+                            "dc1-leaf2a",
+                            "dc1-leaf2b"
+                        ],
+                        "nodes": [
+                            {
+                                "name": "dc1-leaf2c",
+                                "id": 1,
+                                "mgmt_ip": "172.16.93.152/24"
+                            }
+                        ]
+                    },
+                    {
+                        "group": "DC1_L2_LEAF3",
+                        "uplink_switches": [
+                            "dc1-leaf3a",
+                            "dc1-leaf3b"
+                        ],
+                        "nodes": [
+                            {
+                                "name": "dc1-leaf3c",
+                                "id": 1,
+                                "mgmt_ip": "172.16.93.153/24"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "inventory_file": "/home/mark/avd/avd-single-dc-l3ls/avd/inventory.yml",
+            "inventory_dir": "/home/mark/avd/avd-single-dc-l3ls/avd",
+            "ansible_host": "172.16.93.152",
+            "inventory_hostname": "dc1-leaf2c",
+            "inventory_hostname_short": "dc1-leaf2c",
+            "group_names": [
+                "DC1",
+                "DC1_L2_LEAFS",
+                "FABRIC"
+            ],
+            "ansible_facts": {},
+            "role_schema_dir_name": "schemas",
+            "role_schema_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas",
+            "role_schema_file_name": "eos_designs.schema.yml",
+            "role_schema_path": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/eos_designs.schema.yml",
+            "role_schema_fragments_dir_name": "schema_fragments",
+            "role_schema_fragments_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/schema_fragments",
+            "role_schema_fragments_file_glob": "*.schema.yml",
+            "role_schema_fragments_glob": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/schema_fragments/*.schema.yml",
+            "role_documentation_dir_name": "docs",
+            "role_documentation_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/docs",
+            "role_schema_docs_fragments_dir": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs/schemas/doc_fragments",
+            "avd_requirements": {
+                "changed": false,
+                "failed": false
+            },
+            "playbook_dir": "/home/mark/avd/avd-single-dc-l3ls/avd",
+            "ansible_playbook_python": "/home/mark/.venv/bin/python",
+            "ansible_config_file": "/home/mark/avd/avd-single-dc-l3ls/avd/ansible.cfg",
+            "ansible_role_names": [
+                "arista.avd.eos_cli_config_gen",
+                "arista.avd.eos_designs"
+            ],
+            "ansible_play_role_names": [
+                "arista.avd.eos_designs",
+                "arista.avd.eos_cli_config_gen"
+            ],
+            "ansible_dependent_role_names": [],
+            "role_names": [
+                "arista.avd.eos_designs",
+                "arista.avd.eos_cli_config_gen"
+            ],
+            "ansible_play_name": "Build Configurations and Documentation",
+            "role_name": "eos_designs",
+            "role_path": "/home/mark/.ansible/collections/ansible_collections/arista/avd/roles/eos_designs",
+            "role_uuid": "bc241126-6577-82b1-2971-000000000012",
+            "ansible_collection_name": "arista.avd",
+            "ansible_role_name": "arista.avd.eos_designs",
+            "groups": {
+                "all": [
+                    "dc1-spine1",
+                    "dc1-spine2",
+                    "dc1-leaf1c",
+                    "dc1-leaf2c",
+                    "dc1-leaf3c",
+                    "dc1-leaf1a",
+                    "dc1-leaf1b",
+                    "dc1-leaf2a",
+                    "dc1-leaf2b",
+                    "dc1-leaf3a",
+                    "dc1-leaf3b"
+                ],
+                "ungrouped": [],
+                "FABRIC": [
+                    "dc1-spine1",
+                    "dc1-spine2",
+                    "dc1-leaf1c",
+                    "dc1-leaf2c",
+                    "dc1-leaf3c",
+                    "dc1-leaf1a",
+                    "dc1-leaf1b",
+                    "dc1-leaf2a",
+                    "dc1-leaf2b",
+                    "dc1-leaf3a",
+                    "dc1-leaf3b"
+                ],
+                "DC1": [
+                    "dc1-spine1",
+                    "dc1-spine2",
+                    "dc1-leaf1c",
+                    "dc1-leaf2c",
+                    "dc1-leaf3c",
+                    "dc1-leaf1a",
+                    "dc1-leaf1b",
+                    "dc1-leaf2a",
+                    "dc1-leaf2b",
+                    "dc1-leaf3a",
+                    "dc1-leaf3b"
+                ],
+                "DC1_SPINES": [
+                    "dc1-spine1",
+                    "dc1-spine2"
+                ],
+                "DC1_L3_LEAFS": [
+                    "dc1-leaf1a",
+                    "dc1-leaf1b",
+                    "dc1-leaf2a",
+                    "dc1-leaf2b",
+                    "dc1-leaf3a",
+                    "dc1-leaf3b"
+                ],
+                "DC1_LEAF1": [
+                    "dc1-leaf1a",
+                    "dc1-leaf1b"
+                ],
+                "DC1_LEAF2": [
+                    "dc1-leaf2a",
+                    "dc1-leaf2b"
+                ],
+                "DC1_LEAF3": [
+                    "dc1-leaf3a",
+                    "dc1-leaf3b"
+                ],
+                "DC1_L2_LEAFS": [
+                    "dc1-leaf1c",
+                    "dc1-leaf2c",
+                    "dc1-leaf3c"
+                ]
+            },
+            "ansible_play_hosts_all": [
+                "dc1-spine1",
+                "dc1-spine2",
+                "dc1-leaf1c",
+                "dc1-leaf2c",
+                "dc1-leaf3c",
+                "dc1-leaf1a",
+                "dc1-leaf1b",
+                "dc1-leaf2a",
+                "dc1-leaf2b",
+                "dc1-leaf3a",
+                "dc1-leaf3b"
+            ],
+            "ansible_play_hosts": [
+                "dc1-spine1",
+                "dc1-spine2",
+                "dc1-leaf1c",
+                "dc1-leaf2c",
+                "dc1-leaf3c",
+                "dc1-leaf1a",
+                "dc1-leaf1b",
+                "dc1-leaf2a",
+                "dc1-leaf2b",
+                "dc1-leaf3a",
+                "dc1-leaf3b"
+            ],
+            "ansible_play_batch": [
+                "dc1-spine1",
+                "dc1-spine2",
+                "dc1-leaf1c",
+                "dc1-leaf2c",
+                "dc1-leaf3c",
+                "dc1-leaf1a",
+                "dc1-leaf1b",
+                "dc1-leaf2a",
+                "dc1-leaf2b",
+                "dc1-leaf3a",
+                "dc1-leaf3b"
+            ],
+            "play_hosts": [
+                "dc1-spine1",
+                "dc1-spine2",
+                "dc1-leaf1c",
+                "dc1-leaf2c",
+                "dc1-leaf3c",
+                "dc1-leaf1a",
+                "dc1-leaf1b",
+                "dc1-leaf2a",
+                "dc1-leaf2b",
+                "dc1-leaf3a",
+                "dc1-leaf3b"
+            ],
+            "ansible_version": {
+                "string": "2.21.4",
+                "full": "2.21.4",
+                "major": 2,
+                "minor": 21,
+                "revision": 4
+            },
+            "ansible_check_mode": true,
+            "ansible_diff_mode": false,
+            "ansible_forks": 5,
+            "ansible_inventory_sources": [
+                "/home/mark/avd/avd-single-dc-l3ls/avd/inventory.yml"
+            ],
+            "ansible_skip_tags": [],
+            "ansible_run_tags": [
+                "all"
+            ],
+            "ansible_verbosity": 1,
+            "environment": [
+                {}
+            ]
+        }
+    }
+}

@@ -1,0 +1,129 @@
+name: avd-single-dc-l3ls
+prefix: ""
+mgmt:
+  network: custom_mgmt
+  ipv4-subnet: 172.16.93.0/24
+
+topology:
+  nodes:
+# -------------DC1------------------      
+    dc1-spine1:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.11
+      startup-config: basic.txt
+
+    dc1-spine2:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.12
+      startup-config: basic.txt
+            
+    dc1-leaf1a:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.101
+      startup-config: basic.txt
+            
+    dc1-leaf1b:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.102
+      startup-config: basic.txt
+            
+    dc1-leaf2a:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.103
+      startup-config: basic.txt
+            
+    dc1-leaf2b:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.104
+      startup-config: basic.txt
+            
+    dc1-leaf3a:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.105
+      startup-config: basic.txt
+            
+    dc1-leaf3b:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.106      
+      startup-config: basic.txt
+            
+    dc1-leaf1c:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.151
+      startup-config: basic.txt
+            
+    dc1-leaf2c:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.152   
+      startup-config: basic.txt
+            
+    dc1-leaf3c:
+      kind: ceos
+      image: ceos:4.34.8M
+      cpu: 1
+      memory: 2Gb
+      mgmt-ipv4: 172.16.93.153         
+      startup-config: basic.txt
+            
+  links:
+    # DC1 Spine - Leaf  
+    - endpoints: [ "dc1-spine1:eth1", "dc1-leaf1a:eth1"]
+    - endpoints: [ "dc1-spine1:eth2", "dc1-leaf1b:eth1"]
+    - endpoints: [ "dc1-spine1:eth3", "dc1-leaf2a:eth1"]
+    - endpoints: [ "dc1-spine1:eth4", "dc1-leaf2b:eth1"]
+    - endpoints: [ "dc1-spine1:eth5", "dc1-leaf3a:eth1"]
+    - endpoints: [ "dc1-spine1:eth6", "dc1-leaf3b:eth1"]    
+    
+    - endpoints: [ "dc1-spine2:eth1", "dc1-leaf1a:eth2"]
+    - endpoints: [ "dc1-spine2:eth2", "dc1-leaf1b:eth2"]
+    - endpoints: [ "dc1-spine2:eth3", "dc1-leaf2a:eth2"]
+    - endpoints: [ "dc1-spine2:eth4", "dc1-leaf2b:eth2"] 
+    - endpoints: [ "dc1-spine2:eth5", "dc1-leaf3a:eth2"]
+    - endpoints: [ "dc1-spine2:eth6", "dc1-leaf3b:eth2"]       
+    
+    - endpoints: [ "dc1-leaf1a:eth3", "dc1-leaf1b:eth3"]
+    - endpoints: [ "dc1-leaf1a:eth4", "dc1-leaf1b:eth4"]
+    - endpoints: [ "dc1-leaf2a:eth3", "dc1-leaf2b:eth3"]
+    - endpoints: [ "dc1-leaf2a:eth4", "dc1-leaf2b:eth4"]
+    - endpoints: [ "dc1-leaf3a:eth3", "dc1-leaf3b:eth3"]
+    - endpoints: [ "dc1-leaf3a:eth4", "dc1-leaf3b:eth4"]    
+    
+    - endpoints: [ "dc1-leaf1a:eth8", "dc1-leaf1c:eth1"]
+    - endpoints: [ "dc1-leaf1b:eth8", "dc1-leaf1c:eth2"]
+    - endpoints: [ "dc1-leaf2a:eth8", "dc1-leaf2c:eth1"]
+    - endpoints: [ "dc1-leaf2b:eth8", "dc1-leaf2c:eth2"]   
+    - endpoints: [ "dc1-leaf3a:eth8", "dc1-leaf3c:eth1"]
+    - endpoints: [ "dc1-leaf3b:eth8", "dc1-leaf3c:eth2"]        
+
+   
+    

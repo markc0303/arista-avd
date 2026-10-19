@@ -1,0 +1,124 @@
+aaa_root:
+  disabled: true
+clock:
+  timezone: Asia/Taipei
+config_end: true
+enable_password:
+  disabled: true
+ethernet_interfaces:
+- name: Ethernet1
+  description: L2_dc1-leaf2a_Ethernet8
+  shutdown: false
+  channel_group:
+    id: 1
+    mode: active
+  metadata:
+    peer: dc1-leaf2a
+    peer_interface: Ethernet8
+    peer_type: l3leaf
+- name: Ethernet2
+  description: L2_dc1-leaf2b_Ethernet8
+  shutdown: false
+  channel_group:
+    id: 1
+    mode: active
+  metadata:
+    peer: dc1-leaf2b
+    peer_interface: Ethernet8
+    peer_type: l3leaf
+- name: Ethernet5
+  description: SERVER_dc1-leaf2-server1_iLO
+  shutdown: false
+  spanning_tree_portfast: edge
+  metadata:
+    peer: dc1-leaf2-server1
+    peer_interface: iLO
+    peer_type: server
+    peer_key: servers
+  switchport:
+    enabled: true
+    mode: access
+    access_vlan: 11
+hostname: dc1-leaf2c
+ip_domain_lookup:
+  source_interfaces:
+  - name: Management0
+    vrf: MGMT
+ip_igmp_snooping:
+  globally_enabled: true
+ip_name_server:
+  vrfs:
+  - name: MGMT
+    servers:
+    - ip_address: 192.168.1.1
+local_users:
+- name: admin
+  privilege: 15
+  role: network-admin
+  sha512_password: $6$hRPpt0mRKg1IbLxq$zuZlB/ozlYBXH6ObqfpWavwOnVRwRJMb5tL/PjjXWUdG0osH2RadZBsPvUDUiqP8DAJ34E4hPky5xAhzvkMH40
+- name: arista
+  privilege: 15
+  role: network-admin
+  sha512_password: $6$GX5WBIf4Gt/N8VVV$sJGc.25dcxHjMa5DiyFd/BQEs/olKOzvyHiELq0HYFJlc905Fet16XF3lbNBDllpldRlRU0q27SQm4dsg7f9h/
+management_api_http:
+  enable_https: true
+  enable_vrfs:
+  - name: MGMT
+management_interfaces:
+- name: Management0
+  description: OOB_MANAGEMENT
+  shutdown: false
+  vrf: MGMT
+  ip_address: 172.16.93.152/24
+  type: oob
+  gateway: 172.16.93.1
+metadata:
+  is_deployed: true
+  fabric_name: FABRIC
+ntp:
+  local_interface:
+    name: Management0
+    vrf: MGMT
+  servers:
+  - name: 0.pool.ntp.org
+    preferred: true
+  vrf: MGMT
+port_channel_interfaces:
+- name: Port-Channel1
+  description: L2_DC1_L3_LEAF2_Port-Channel8
+  shutdown: false
+  switchport:
+    enabled: true
+    mode: trunk
+    trunk:
+      allowed_vlan: 3401-3402
+service_routing_protocols_model: multi-agent
+spanning_tree:
+  mode: mstp
+  mst_instances:
+  - id: '0'
+    priority: 32768
+static_routes:
+- vrf: MGMT
+  prefix: 0.0.0.0/0
+  next_hop: 172.16.93.1
+transceiver_qsfp_default_mode_4x10: true
+vlan_internal_order:
+  allocation: ascending
+  range:
+    beginning: 1006
+    ending: 1199
+vlans:
+- id: 3401
+  name: L2_VLAN3401
+  metadata:
+    tenants:
+    - TENANT1
+- id: 3402
+  name: L2_VLAN3402
+  metadata:
+    tenants:
+    - TENANT1
+vrfs:
+- name: MGMT
+  ip_routing: false
