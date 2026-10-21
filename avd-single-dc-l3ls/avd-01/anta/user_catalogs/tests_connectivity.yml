@@ -1,0 +1,27 @@
+anta.tests.connectivity:
+  - VerifyReachability:
+      hosts:
+        - source: Loopback0
+          destination: 10.255.0.3
+          vrf: default
+          df_bit: True
+          size: 100
+          reachable: true
+        - source: Loopback0
+          destination: 10.255.0.4
+          vrf: default
+          df_bit: True
+          size: 100
+          reachable: true
+        - source: Loopback0
+          destination: 10.255.0.5
+          vrf: default
+          df_bit: True
+          size: 100
+          reachable: true
+        - source: Loopback0
+          destination: 10.255.0.6
+          vrf: default
+          df_bit: True
+          size: 100
+          reachable: true                              

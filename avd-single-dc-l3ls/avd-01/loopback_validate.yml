@@ -1,0 +1,22 @@
+---
+- name: Validate states on EOS devices
+  hosts: DC1_L3_LEAVES
+  gather_facts: false
+
+  tasks:
+    - name: validate states on EOS devices
+      import_role:
+        name: arista.avd.anta_runner 
+      ignore_errors: true        
+      vars:
+        # Enable extra fabric-wide validation tests.
+        avd_catalogs_extra_fabric_validation: true 
+        user_catalogs_enabled: true
+        root_dir: "{{ playbook_dir }}"
+        anta_dir_name: "anta"
+        user_catalogs_dir_name: "user_catalogs"            
+        avd_catalogs_filters: 
+          - skip_tests: [VerifyMemoryUtilization, VerifyLoggingErrors, VerifyInterfaceDiscards, VerifyFileSystemUtilization, VerifyNTP]
+        anta_workflow:
+          user_catalogs:
+            - "loopback_reachability.yaml"        
