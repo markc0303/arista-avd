@@ -40,12 +40,10 @@
 | ---- | ---- | -------------- | --------- | --------- | -------------- |
 | l3leaf | dc1-leaf1a | Ethernet49/1 | spine | dc1-spine1 | Ethernet1/1 |
 | l3leaf | dc1-leaf1a | Ethernet50/1 | spine | dc1-spine2 | Ethernet1/1 |
-| l3leaf | dc1-leaf1a | Ethernet51/1 | spine | dc1-spine3 | Ethernet1/1 |
 | l3leaf | dc1-leaf1a | Ethernet53/1 | mlag_peer | dc1-leaf1b | Ethernet53/1 |
 | l3leaf | dc1-leaf1a | Ethernet54/1 | mlag_peer | dc1-leaf1b | Ethernet54/1 |
 | l3leaf | dc1-leaf1b | Ethernet49/1 | spine | dc1-spine1 | Ethernet1/3 |
 | l3leaf | dc1-leaf1b | Ethernet50/1 | spine | dc1-spine2 | Ethernet1/3 |
-| l3leaf | dc1-leaf1b | Ethernet51/1 | spine | dc1-spine3 | Ethernet1/3 |
 | l3leaf | dc1-leaf2a | Ethernet49/1 | spine | dc1-spine1 | Ethernet1/5 |
 | l3leaf | dc1-leaf2a | Ethernet50/1 | spine | dc1-spine2 | Ethernet1/5 |
 | l3leaf | dc1-leaf2a | Ethernet51/1 | spine | dc1-spine3 | Ethernet1/5 |
@@ -69,7 +67,7 @@
 
 | Uplink IPv4 Pool | Available Addresses | Assigned addresses | Assigned Address % |
 | ---------------- | ------------------- | ------------------ | ------------------ |
-| 10.255.255.0/24 | 256 | 36 | 14.07 % |
+| 10.255.255.0/24 | 256 | 32 | 12.5 % |
 
 ### Point-To-Point Links Node Allocation
 
@@ -77,10 +75,8 @@
 | ---- | -------------- | --------------- | --------- | -------------- | --------------- |
 | dc1-leaf1a | Ethernet49/1 | 10.255.255.1/31 | dc1-spine1 | Ethernet1/1 | 10.255.255.0/31 |
 | dc1-leaf1a | Ethernet50/1 | 10.255.255.3/31 | dc1-spine2 | Ethernet1/1 | 10.255.255.2/31 |
-| dc1-leaf1a | Ethernet51/1 | 10.255.255.5/31 | dc1-spine3 | Ethernet1/1 | 10.255.255.4/31 |
-| dc1-leaf1b | Ethernet49/1 | 10.255.255.7/31 | dc1-spine1 | Ethernet1/3 | 10.255.255.6/31 |
-| dc1-leaf1b | Ethernet50/1 | 10.255.255.9/31 | dc1-spine2 | Ethernet1/3 | 10.255.255.8/31 |
-| dc1-leaf1b | Ethernet51/1 | 10.255.255.11/31 | dc1-spine3 | Ethernet1/3 | 10.255.255.10/31 |
+| dc1-leaf1b | Ethernet49/1 | 10.255.255.5/31 | dc1-spine1 | Ethernet1/3 | 10.255.255.4/31 |
+| dc1-leaf1b | Ethernet50/1 | 10.255.255.7/31 | dc1-spine2 | Ethernet1/3 | 10.255.255.6/31 |
 | dc1-leaf2a | Ethernet49/1 | 10.255.255.13/31 | dc1-spine1 | Ethernet1/5 | 10.255.255.12/31 |
 | dc1-leaf2a | Ethernet50/1 | 10.255.255.15/31 | dc1-spine2 | Ethernet1/5 | 10.255.255.14/31 |
 | dc1-leaf2a | Ethernet51/1 | 10.255.255.17/31 | dc1-spine3 | Ethernet1/5 | 10.255.255.16/31 |

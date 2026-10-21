@@ -228,7 +228,7 @@ vlan internal order ascending range 1006 1199
 | Interface | Description | Channel Group | IP Address | VRF | MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | ------------- | ---------- | --- | --- | -------- | ------ | ------- |
 | Ethernet1/1 | P2P_dc1-leaf1a_Ethernet49/1 | - | 10.255.255.0/31 | default | 9214 | False | - | - |
-| Ethernet1/3 | P2P_dc1-leaf1b_Ethernet49/1 | - | 10.255.255.6/31 | default | 9214 | False | - | - |
+| Ethernet1/3 | P2P_dc1-leaf1b_Ethernet49/1 | - | 10.255.255.4/31 | default | 9214 | False | - | - |
 | Ethernet1/5 | P2P_dc1-leaf2a_Ethernet49/1 | - | 10.255.255.12/31 | default | 9214 | False | - | - |
 | Ethernet1/7 | P2P_dc1-leaf2b_Ethernet49/1 | - | 10.255.255.18/31 | default | 9214 | False | - | - |
 | Ethernet2/1 | P2P_dc1-leaf3a_Ethernet49/1 | - | 10.255.255.24/31 | default | 9214 | False | - | - |
@@ -252,7 +252,7 @@ interface Ethernet1/3
    mtu 9214
    speed 100g-2
    no switchport
-   ip address 10.255.255.6/31
+   ip address 10.255.255.4/31
 !
 interface Ethernet1/5
    description P2P_dc1-leaf2a_Ethernet49/1
@@ -414,7 +414,7 @@ ASN Notation: asplain
 | 10.255.0.8 | 65103 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.255.0.9 | 65103 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.255.255.1 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
-| 10.255.255.7 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
+| 10.255.255.5 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
 | 10.255.255.13 | 65102 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
 | 10.255.255.19 | 65102 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
 | 10.255.255.25 | 65103 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
@@ -468,9 +468,9 @@ router bgp 65100
    neighbor 10.255.255.1 peer group IPv4-UNDERLAY-PEERS
    neighbor 10.255.255.1 remote-as 65101
    neighbor 10.255.255.1 description dc1-leaf1a_Ethernet49/1
-   neighbor 10.255.255.7 peer group IPv4-UNDERLAY-PEERS
-   neighbor 10.255.255.7 remote-as 65101
-   neighbor 10.255.255.7 description dc1-leaf1b_Ethernet49/1
+   neighbor 10.255.255.5 peer group IPv4-UNDERLAY-PEERS
+   neighbor 10.255.255.5 remote-as 65101
+   neighbor 10.255.255.5 description dc1-leaf1b_Ethernet49/1
    neighbor 10.255.255.13 peer group IPv4-UNDERLAY-PEERS
    neighbor 10.255.255.13 remote-as 65102
    neighbor 10.255.255.13 description dc1-leaf2a_Ethernet49/1

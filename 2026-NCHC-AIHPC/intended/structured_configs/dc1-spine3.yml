@@ -7,30 +7,6 @@ enable_password:
   disabled: true
 eos_cli: load-interval default 1
 ethernet_interfaces:
-- name: Ethernet1/1
-  description: P2P_dc1-leaf1a_Ethernet51/1
-  shutdown: false
-  speed: 100g-2
-  mtu: 9214
-  ip_address: 10.255.255.4/31
-  metadata:
-    peer: dc1-leaf1a
-    peer_interface: Ethernet51/1
-    peer_type: l3leaf
-  switchport:
-    enabled: false
-- name: Ethernet1/3
-  description: P2P_dc1-leaf1b_Ethernet51/1
-  shutdown: false
-  speed: 100g-2
-  mtu: 9214
-  ip_address: 10.255.255.10/31
-  metadata:
-    peer: dc1-leaf1b
-    peer_interface: Ethernet51/1
-    peer_type: l3leaf
-  switchport:
-    enabled: false
 - name: Ethernet1/5
   description: P2P_dc1-leaf2a_Ethernet51/1
   shutdown: false
@@ -171,18 +147,6 @@ router_bgp:
     send_community: all
     maximum_routes: 0
   neighbors:
-  - ip_address: 10.255.255.5
-    peer_group: IPv4-UNDERLAY-PEERS
-    remote_as: '65101'
-    metadata:
-      peer: dc1-leaf1a
-    description: dc1-leaf1a_Ethernet51/1
-  - ip_address: 10.255.255.11
-    peer_group: IPv4-UNDERLAY-PEERS
-    remote_as: '65101'
-    metadata:
-      peer: dc1-leaf1b
-    description: dc1-leaf1b_Ethernet51/1
   - ip_address: 10.255.255.17
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65102'
@@ -207,18 +171,6 @@ router_bgp:
     metadata:
       peer: dc1-leaf3b
     description: dc1-leaf3b_Ethernet51/1
-  - ip_address: 10.255.0.4
-    peer_group: EVPN-OVERLAY-PEERS
-    remote_as: '65101'
-    metadata:
-      peer: dc1-leaf1a
-    description: dc1-leaf1a_Loopback0
-  - ip_address: 10.255.0.5
-    peer_group: EVPN-OVERLAY-PEERS
-    remote_as: '65101'
-    metadata:
-      peer: dc1-leaf1b
-    description: dc1-leaf1b_Loopback0
   - ip_address: 10.255.0.6
     peer_group: EVPN-OVERLAY-PEERS
     remote_as: '65102'

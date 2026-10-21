@@ -24,7 +24,7 @@ ethernet_interfaces:
   shutdown: false
   speed: 100g-2
   mtu: 9214
-  ip_address: 10.255.255.6/31
+  ip_address: 10.255.255.4/31
   metadata:
     peer: dc1-leaf1b
     peer_interface: Ethernet49/1
@@ -177,7 +177,7 @@ router_bgp:
     metadata:
       peer: dc1-leaf1a
     description: dc1-leaf1a_Ethernet49/1
-  - ip_address: 10.255.255.7
+  - ip_address: 10.255.255.5
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65101'
     metadata:
