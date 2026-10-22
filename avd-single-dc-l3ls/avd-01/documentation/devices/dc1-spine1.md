@@ -123,14 +123,14 @@ NTP servers VRF: MGMT
 
 | Server | Preferred | Burst | iBurst | Version | Min Poll | Max Poll | Local-interface | Source Address | Key |
 | ------ | --------- | ----- | ------ | ------- | -------- | -------- | --------------- | -------------- | --- |
-| 0.pool.ntp.org | True | - | - | - | - | - | - | - | - |
+| 10.1.9.14 | True | - | - | - | - | - | - | - | - |
 
 #### NTP Device Configuration
 
 ```eos
 !
 ntp local-interface vrf MGMT Management0
-ntp server vrf MGMT 0.pool.ntp.org prefer
+ntp server vrf MGMT 10.1.9.14 prefer
 ```
 
 ### Management API HTTP

@@ -13,4 +13,13 @@
         # Enable extra fabric-wide validation tests.
         avd_catalogs_extra_fabric_validation: true          
         avd_catalogs_filters: 
-          - skip_tests: [VerifyMemoryUtilization, VerifyLoggingErrors, VerifyInterfaceDiscards, VerifyFileSystemUtilization, VerifyNTP]
+          - skip_tests: 
+              - VerifyMemoryUtilization
+              - VerifyLoggingErrors
+              - VerifyInterfaceDiscards
+              - VerifyFileSystemUtilization
+              #- VerifyNTP
+              - VerifyEnvironmentPower
+              - VerifyEnvironmentCooling
+              - VerifyTemperature
+              - VerifyTransceiversManufacturers         

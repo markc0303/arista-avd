@@ -124,7 +124,7 @@ ntp:
     name: Management0
     vrf: MGMT
   servers:
-  - name: 0.pool.ntp.org
+  - name: 10.1.9.14
     preferred: true
   vrf: MGMT
 prefix_lists:
