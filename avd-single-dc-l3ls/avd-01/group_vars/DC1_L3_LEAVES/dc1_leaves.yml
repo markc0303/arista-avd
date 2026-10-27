@@ -2,13 +2,13 @@
 type: l3leaf
 l3leaf:
   defaults:
-    loopback_ipv4_pool: 10.255.0.0/27
-    loopback_ipv4_offset: 2
-    vtep_loopback_ipv4_pool: 10.255.1.0/27
+    loopback_ipv4_pool: 10.255.0.0/24
+    loopback_ipv4_offset: 3
+    vtep_loopback_ipv4_pool: 10.255.1.0/24
     uplink_switches: ['dc1-spine1', 'dc1-spine2']
-    uplink_ipv4_pool: 10.1.0.0/26
-    mlag_peer_ipv4_pool: 10.255.1.64/27
-    mlag_peer_l3_ipv4_pool: 10.255.1.96/27
+    uplink_ipv4_pool: 10.1.0.0/24
+    mlag_peer_ipv4_pool: 10.255.2.0/25
+    mlag_peer_l3_ipv4_pool: 10.255.2.128/25
     virtual_router_mac_address: 00:1c:73:00:00:99
     spanning_tree_priority: 4096
     spanning_tree_mode: mstp
@@ -22,7 +22,7 @@ l3leaf:
           id: 1
           mgmt_ip: 172.16.93.101/24
           uplink_switches: [ dc1-spine1, dc1-spine2 ]
-          uplink_switch_interfaces: [ Ethernet1, Ethernet1]
+          uplink_switch_interfaces: [ Ethernet1, Ethernet1 ]
           uplink_interface_speed: "forced 100gfull"
           uplink_interfaces: [ Ethernet1, Ethernet2 ]
           mlag_interfaces: [ Ethernet3-4 ]

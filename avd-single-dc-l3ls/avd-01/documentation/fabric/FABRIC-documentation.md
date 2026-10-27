@@ -71,7 +71,7 @@
 
 | Uplink IPv4 Pool | Available Addresses | Assigned addresses | Assigned Address % |
 | ---------------- | ------------------- | ------------------ | ------------------ |
-| 10.1.0.0/26 | 64 | 24 | 37.5 % |
+| 10.1.0.0/24 | 256 | 24 | 9.38 % |
 
 ### Point-To-Point Links Node Allocation
 
@@ -94,35 +94,34 @@
 
 | Loopback Pool | Available Addresses | Assigned addresses | Assigned Address % |
 | ------------- | ------------------- | ------------------ | ------------------ |
-| 1.1.1.0/27 | 32 | 2 | 6.25 % |
-| 10.255.0.0/27 | 32 | 6 | 18.75 % |
+| 10.255.0.0/24 | 256 | 8 | 3.13 % |
 
 ### Loopback0 Interfaces Node Allocation
 
 | POD | Node | Loopback0 |
 | --- | ---- | --------- |
-| FABRIC | dc1-leaf1a | 10.255.0.3/32 |
-| FABRIC | dc1-leaf1b | 10.255.0.4/32 |
-| FABRIC | dc1-leaf2a | 10.255.0.5/32 |
-| FABRIC | dc1-leaf2b | 10.255.0.6/32 |
-| FABRIC | dc1-leaf3a | 10.255.0.7/32 |
-| FABRIC | dc1-leaf3b | 10.255.0.8/32 |
-| FABRIC | dc1-spine1 | 1.1.1.1/32 |
-| FABRIC | dc1-spine2 | 1.1.1.2/32 |
+| FABRIC | dc1-leaf1a | 10.255.0.4/32 |
+| FABRIC | dc1-leaf1b | 10.255.0.5/32 |
+| FABRIC | dc1-leaf2a | 10.255.0.6/32 |
+| FABRIC | dc1-leaf2b | 10.255.0.7/32 |
+| FABRIC | dc1-leaf3a | 10.255.0.8/32 |
+| FABRIC | dc1-leaf3b | 10.255.0.9/32 |
+| FABRIC | dc1-spine1 | 10.255.0.1/32 |
+| FABRIC | dc1-spine2 | 10.255.0.2/32 |
 
 ### VTEP Loopback VXLAN Tunnel Source Interfaces (VTEPs Only)
 
 | VTEP Loopback Pool | Available Addresses | Assigned addresses | Assigned Address % |
 | ------------------ | ------------------- | ------------------ | ------------------ |
-| 10.255.1.0/27 | 32 | 6 | 18.75 % |
+| 10.255.1.0/24 | 256 | 6 | 2.35 % |
 
 ### VTEP Loopback Node allocation
 
 | POD | Node | Loopback1 |
 | --- | ---- | --------- |
-| FABRIC | dc1-leaf1a | 10.255.1.3/32 |
-| FABRIC | dc1-leaf1b | 10.255.1.3/32 |
-| FABRIC | dc1-leaf2a | 10.255.1.5/32 |
-| FABRIC | dc1-leaf2b | 10.255.1.5/32 |
-| FABRIC | dc1-leaf3a | 10.255.1.7/32 |
-| FABRIC | dc1-leaf3b | 10.255.1.7/32 |
+| FABRIC | dc1-leaf1a | 10.255.1.4/32 |
+| FABRIC | dc1-leaf1b | 10.255.1.4/32 |
+| FABRIC | dc1-leaf2a | 10.255.1.6/32 |
+| FABRIC | dc1-leaf2b | 10.255.1.6/32 |
+| FABRIC | dc1-leaf3a | 10.255.1.8/32 |
+| FABRIC | dc1-leaf3b | 10.255.1.8/32 |

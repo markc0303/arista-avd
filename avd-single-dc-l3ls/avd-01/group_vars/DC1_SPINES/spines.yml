@@ -2,7 +2,7 @@
 type: spine
 spine:
   defaults:
-    loopback_ipv4_pool: 1.1.1.0/27
+    loopback_ipv4_pool: 10.255.0.0/24
     # Autonous System Number for BGP
     bgp_as: 65100
     raw_eos_cli: load-interval default 1 

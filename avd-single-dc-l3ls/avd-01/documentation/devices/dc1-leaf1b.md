@@ -200,7 +200,7 @@ Enable password has been disabled
 
 | Domain-id | Local-interface | Peer-address | Peer-link |
 | --------- | --------------- | ------------ | --------- |
-| DC1_L3_LEAF1 | Vlan4094 | 10.255.1.64 | Port-Channel3 |
+| DC1_L3_LEAF1 | Vlan4094 | 10.255.2.0 | Port-Channel3 |
 
 Dual primary detection is disabled.
 
@@ -211,7 +211,7 @@ Dual primary detection is disabled.
 mlag configuration
    domain-id DC1_L3_LEAF1
    local-interface Vlan4094
-   peer-address 10.255.1.64
+   peer-address 10.255.2.0
    peer-link Port-Channel3
    reload-delay mlag 300
    reload-delay non-mlag 330
@@ -402,8 +402,8 @@ interface Port-Channel8
 
 | Interface | Description | VRF | IP Address |
 | --------- | ----------- | --- | ---------- |
-| Loopback0 | ROUTER_ID | default | 10.255.0.4/32 |
-| Loopback1 | VXLAN_TUNNEL_SOURCE | default | 10.255.1.3/32 |
+| Loopback0 | ROUTER_ID | default | 10.255.0.5/32 |
+| Loopback1 | VXLAN_TUNNEL_SOURCE | default | 10.255.1.4/32 |
 
 ##### IPv6
 
@@ -419,12 +419,12 @@ interface Port-Channel8
 interface Loopback0
    description ROUTER_ID
    no shutdown
-   ip address 10.255.0.4/32
+   ip address 10.255.0.5/32
 !
 interface Loopback1
    description VXLAN_TUNNEL_SOURCE
    no shutdown
-   ip address 10.255.1.3/32
+   ip address 10.255.1.4/32
 ```
 
 ### VLAN Interfaces
@@ -440,8 +440,8 @@ interface Loopback1
 
 | Interface | VRF | IP Address | IP Address Virtual | IP Router Virtual Address | ACL In | ACL Out |
 | --------- | --- | ---------- | ------------------ | ------------------------- | ------ | ------- |
-| Vlan4093 | default | 10.255.1.97/31 | - | - | - | - |
-| Vlan4094 | default | 10.255.1.65/31 | - | - | - | - |
+| Vlan4093 | default | 10.255.2.129/31 | - | - | - | - |
+| Vlan4094 | default | 10.255.2.1/31 | - | - | - | - |
 
 #### VLAN Interfaces Device Configuration
 
@@ -451,14 +451,14 @@ interface Vlan4093
    description MLAG_L3
    no shutdown
    mtu 9214
-   ip address 10.255.1.97/31
+   ip address 10.255.2.129/31
 !
 interface Vlan4094
    description MLAG
    no shutdown
    mtu 9214
    no autostate
-   ip address 10.255.1.65/31
+   ip address 10.255.2.1/31
 ```
 
 ### VXLAN Interface
@@ -564,7 +564,7 @@ ASN Notation: asplain
 
 | BGP AS | Router ID |
 | ------ | --------- |
-| 65101 | 10.255.0.4 |
+| 65101 | 10.255.0.5 |
 
 | BGP Tuning |
 | ---------- |
@@ -606,11 +606,11 @@ ASN Notation: asplain
 
 | Neighbor | Remote AS | VRF | Shutdown | Send-community | Maximum-routes | Maximum-accepted-routes | Maximum-advertised-routes | Allowas-in | BFD | RIB Pre-Policy Retain | Route-Reflector Client | Passive | TTL Max Hops |
 | -------- | --------- | --- | -------- | -------------- | -------------- | ----------------------- | ------------------------- | ---------- | --- | --------------------- | ---------------------- | ------- | ------------ |
-| 1.1.1.1 | 65100 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
-| 1.1.1.2 | 65100 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.1.0.4 | 65100 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
 | 10.1.0.6 | 65100 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
-| 10.255.1.96 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | default | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - | - | - |
+| 10.255.0.1 | 65100 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
+| 10.255.0.2 | 65100 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
+| 10.255.2.128 | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | default | - | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | Inherited from peer group MLAG-IPv4-UNDERLAY-PEER | - | - | - | - | - | - | - | - |
 
 #### Router BGP EVPN Address Family
 
@@ -624,15 +624,15 @@ ASN Notation: asplain
 
 | VLAN | Route-Distinguisher | Both Route-Target | Import Route Target | Export Route-Target | Redistribute |
 | ---- | ------------------- | ----------------- | ------------------- | ------------------- | ------------ |
-| 3401 | 10.255.0.4:13401 | 13401:13401 | - | - | learned |
-| 3402 | 10.255.0.4:13402 | 13402:13402 | - | - | learned |
+| 3401 | 10.255.0.5:13401 | 13401:13401 | - | - | learned |
+| 3402 | 10.255.0.5:13402 | 13402:13402 | - | - | learned |
 
 #### Router BGP Device Configuration
 
 ```eos
 !
 router bgp 65101
-   router-id 10.255.0.4
+   router-id 10.255.0.5
    no bgp default ipv4-unicast
    maximum-paths 4
    neighbor EVPN-OVERLAY-PEERS peer group
@@ -654,29 +654,29 @@ router bgp 65101
    neighbor MLAG-IPv4-UNDERLAY-PEER password 7 <removed>
    neighbor MLAG-IPv4-UNDERLAY-PEER send-community
    neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 256000
-   neighbor 1.1.1.1 peer group EVPN-OVERLAY-PEERS
-   neighbor 1.1.1.1 remote-as 65100
-   neighbor 1.1.1.1 description dc1-spine1_Loopback0
-   neighbor 1.1.1.2 peer group EVPN-OVERLAY-PEERS
-   neighbor 1.1.1.2 remote-as 65100
-   neighbor 1.1.1.2 description dc1-spine2_Loopback0
    neighbor 10.1.0.4 peer group IPv4-UNDERLAY-PEERS
    neighbor 10.1.0.4 remote-as 65100
    neighbor 10.1.0.4 description dc1-spine1_Ethernet2
    neighbor 10.1.0.6 peer group IPv4-UNDERLAY-PEERS
    neighbor 10.1.0.6 remote-as 65100
    neighbor 10.1.0.6 description dc1-spine2_Ethernet2
-   neighbor 10.255.1.96 peer group MLAG-IPv4-UNDERLAY-PEER
-   neighbor 10.255.1.96 description dc1-leaf1a_Vlan4093
+   neighbor 10.255.0.1 peer group EVPN-OVERLAY-PEERS
+   neighbor 10.255.0.1 remote-as 65100
+   neighbor 10.255.0.1 description dc1-spine1_Loopback0
+   neighbor 10.255.0.2 peer group EVPN-OVERLAY-PEERS
+   neighbor 10.255.0.2 remote-as 65100
+   neighbor 10.255.0.2 description dc1-spine2_Loopback0
+   neighbor 10.255.2.128 peer group MLAG-IPv4-UNDERLAY-PEER
+   neighbor 10.255.2.128 description dc1-leaf1a_Vlan4093
    redistribute connected route-map RM-CONN-2-BGP
    !
    vlan 3401
-      rd 10.255.0.4:13401
+      rd 10.255.0.5:13401
       route-target both 13401:13401
       redistribute learned
    !
    vlan 3402
-      rd 10.255.0.4:13402
+      rd 10.255.0.5:13402
       route-target both 13402:13402
       redistribute learned
    !
@@ -732,16 +732,16 @@ router bfd
 
 | Sequence | Action |
 | -------- | ------ |
-| 10 | permit 10.255.0.0/27 eq 32 |
-| 20 | permit 10.255.1.0/27 eq 32 |
+| 10 | permit 10.255.0.0/24 eq 32 |
+| 20 | permit 10.255.1.0/24 eq 32 |
 
 #### Prefix-lists Device Configuration
 
 ```eos
 !
 ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
-   seq 10 permit 10.255.0.0/27 eq 32
-   seq 20 permit 10.255.1.0/27 eq 32
+   seq 10 permit 10.255.0.0/24 eq 32
+   seq 20 permit 10.255.1.0/24 eq 32
 ```
 
 ### Route-maps
