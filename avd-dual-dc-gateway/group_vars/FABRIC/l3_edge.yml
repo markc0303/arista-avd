@@ -1,0 +1,9 @@
+l3_edge:
+  p2p_links:
+    - nodes: [ "dc1-borderleaf1", "dc2-borderleaf1" ]
+      interfaces: [ "Ethernet49", "Ethernet49"]
+      ip: [ "192.168.12.0/31", "192.168.12.1/31"]
+      speed: "100g"
+      as: [ 65111, 65222]
+      include_in_underlay_protocol: true
+      descriptions: [ "DC1_LINK2_DC2", "DC2_LINK2_DC1"]

@@ -1,0 +1,85 @@
+---
+type: l3leaf
+l3leaf:
+  defaults:
+    loopback_ipv4_pool: 10.255.101.0/24
+    loopback_ipv4_offset: 3
+    vtep_loopback_ipv4_pool: 10.255.102.0/24
+    uplink_switches: ['dc1-spine1', 'dc1-spine2']
+    uplink_ipv4_pool: 10.255.103.0/24
+    mlag_peer_ipv4_pool: 10.255.252.0/24
+    mlag_peer_l3_ipv4_pool: 10.255.251.0/24
+    virtual_router_mac_address: 00:1c:73:00:00:aa
+    spanning_tree_priority: 4096
+    spanning_tree_mode: mstp
+    raw_eos_cli: load-interval default 1 
+    mgmt_interface: Management0    
+    
+  node_groups:    
+    - group: DC1_L3_LEAF1
+      bgp_as: 65101
+      nodes:
+        - name: dc1-leaf1a
+          id: 1
+          mgmt_ip: 172.20.96.101/24
+          uplink_switches: [ dc1-spine1, dc1-spine2 ]
+          uplink_switch_interfaces: [ Ethernet1, Ethernet1 ]
+          uplink_interface_speed: "forced 100gfull"
+          uplink_interfaces: [ Ethernet1, Ethernet2 ]
+          mlag_interfaces: [ Ethernet3-4 ]
+        - name: dc1-leaf1b
+          id: 2
+          mgmt_ip: 172.20.96.102/24
+          uplink_switches: [ dc1-spine1, dc1-spine2 ]
+          uplink_switch_interfaces: [ Ethernet2, Ethernet2 ]
+          uplink_interface_speed: "forced 100gfull"
+          uplink_interfaces: [ Ethernet1, Ethernet2 ]
+          mlag_interfaces: [ Ethernet3-4 ]
+          bgp_as: 65101
+
+    - group: DC1_L3_LEAF2
+      bgp_as: 65102
+      nodes:
+        - name: dc1-leaf2a
+          id: 3
+          mgmt_ip: 172.20.96.103/24
+          uplink_switches: [ dc1-spine1, dc1-spine2 ]
+          uplink_switch_interfaces: [ Ethernet3, Ethernet3 ]
+          uplink_interface_speed: "forced 100gfull"
+          uplink_interfaces: [ Ethernet1, Ethernet2 ] 
+          mlag_interfaces: [ Ethernet3-4 ]         
+        - name: dc1-leaf2b
+          id: 4
+          mgmt_ip: 172.20.96.104/24
+          uplink_switches: [ dc1-spine1, dc1-spine2 ]
+          uplink_switch_interfaces: [ Ethernet4, Ethernet4 ]
+          uplink_interface_speed: "forced 100gfull"
+          uplink_interfaces: [ Ethernet1, Ethernet2 ] 
+          mlag_interfaces: [ Ethernet3-4 ]           
+          
+    - group: DC1_BORDERLEAF1
+      bgp_as: 65111
+      nodes:
+        - name: dc1-borderleaf1
+          id: 5
+          mgmt_ip: 172.20.96.105/24
+          uplink_switches: [ dc1-spine1, dc1-spine2 ]
+          uplink_switch_interfaces: [ Ethernet5, Ethernet5 ]
+          uplink_interface_speed: "forced 100gfull"
+          uplink_interfaces: [ Ethernet1, Ethernet2 ] 
+          mlag: false 
+          platform: cEOSLab   
+          evpn_gateway:
+            remote_peers:
+              - hostname: dc2-borderleaf1
+                ip_address: 10.255.201.8
+                bgp_as: 65222  
+            evpn_l2:
+              enabled: true            
+            evpn_l3:
+              enabled: true
+              # mode: "rd-rt-rewrite"
+              
+    
+
+ 

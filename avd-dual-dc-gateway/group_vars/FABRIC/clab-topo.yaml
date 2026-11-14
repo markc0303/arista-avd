@@ -1,0 +1,20 @@
+# group_vars/FABRIC.yml
+
+# Specify the cEOS Docker image imported onto your host
+ceos_image: ceos:4.34.8M
+
+# Enable built-in Containerlab topology generation (AVD 4.8+)
+avd_eos_designs_structured_config:
+  custom_structured_configuration_prefix: []
+
+# Define Containerlab settings
+containerlab:
+  enabled: true
+  name: avd_fabric_lab
+  mgmt:
+    network: clab_mgmt
+    ipv4_subnet: 172.20.96.0/24
+  nodes:
+    defaults:
+      kind: arista_ceos
+      image: "{{ ceos_image }}"
