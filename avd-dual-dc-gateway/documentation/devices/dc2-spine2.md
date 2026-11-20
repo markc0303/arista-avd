@@ -398,12 +398,12 @@ ASN Notation: asplain
 | Neighbor | Remote AS | VRF | Shutdown | Send-community | Maximum-routes | Maximum-accepted-routes | Maximum-advertised-routes | Allowas-in | BFD | RIB Pre-Policy Retain | Route-Reflector Client | Passive | TTL Max Hops |
 | -------- | --------- | --- | -------- | -------------- | -------------- | ----------------------- | ------------------------- | ---------- | --- | --------------------- | ---------------------- | ------- | ------------ |
 | 10.255.201.4 | 65201 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
-| 10.255.201.5 | 65101 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
+| 10.255.201.5 | 65201 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.255.201.6 | 65202 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.255.201.7 | 65202 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.255.201.8 | 65222 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.255.203.3 | 65201 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
-| 10.255.203.7 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
+| 10.255.203.7 | 65201 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
 | 10.255.203.11 | 65202 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
 | 10.255.203.15 | 65202 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
 | 10.255.203.19 | 65222 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - | - | - |
@@ -440,7 +440,7 @@ router bgp 65200
    neighbor 10.255.201.4 remote-as 65201
    neighbor 10.255.201.4 description dc2-leaf1a_Loopback0
    neighbor 10.255.201.5 peer group EVPN-OVERLAY-PEERS
-   neighbor 10.255.201.5 remote-as 65101
+   neighbor 10.255.201.5 remote-as 65201
    neighbor 10.255.201.5 description dc2-leaf1b_Loopback0
    neighbor 10.255.201.6 peer group EVPN-OVERLAY-PEERS
    neighbor 10.255.201.6 remote-as 65202
@@ -455,7 +455,7 @@ router bgp 65200
    neighbor 10.255.203.3 remote-as 65201
    neighbor 10.255.203.3 description dc2-leaf1a_Ethernet2
    neighbor 10.255.203.7 peer group IPv4-UNDERLAY-PEERS
-   neighbor 10.255.203.7 remote-as 65101
+   neighbor 10.255.203.7 remote-as 65201
    neighbor 10.255.203.7 description dc2-leaf1b_Ethernet2
    neighbor 10.255.203.11 peer group IPv4-UNDERLAY-PEERS
    neighbor 10.255.203.11 remote-as 65202

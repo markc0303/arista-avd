@@ -35,7 +35,6 @@ l3leaf:
           uplink_interface_speed: "forced 100gfull"
           uplink_interfaces: [ Ethernet1, Ethernet2 ]
           mlag_interfaces: [ Ethernet3-4 ]
-          bgp_as: 65101
 
     - group: DC2_L3_LEAF2
       bgp_as: 65202
@@ -78,7 +77,8 @@ l3leaf:
               enabled: true
             evpn_l3:
               enabled: true
-              # mode: "rd-rt-rewrite"
+              mode: "rd-rt-rewrite"
+  
                  
                              
     

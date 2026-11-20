@@ -1,0 +1,47 @@
+name: {{ fabric_name | default('avd-dual-dc-lab') }}
+mgmt:
+  network: {{ clab_mgmt_network | default('clab-mgmt') }}
+  ipv4-subnet: {{ clab_mgmt_subnet | default('172.20.20.0/24') }}
+
+topology:
+  kinds:
+    arista_ceos:
+      image: {{ ceos_image | default('ceos:4.32.0F') }}
+  nodes:
+{% for host in groups[fabric_group] | sort %}
+{% set host_cfg = hostvars[host]['avd_structured_config'] %}
+    {{ host }}:
+      kind: arista_ceos
+{% if host_cfg.management_interfaces is defined %}
+{% for mgmt_if in host_cfg.management_interfaces %}
+{% if mgmt_if.ip_address is defined and mgmt_if.ip_address != 'dhcp' %}
+      mgmt-ipv4: {{ mgmt_if.ip_address.split('/')[0] }}
+{% endif %}
+{% endfor %}
+{% endif %}
+      startup-config: intended/configs/{{ host }}.cfg
+{% endfor %}
+
+  links:
+{% set ns = namespace(seen_links=[]) %}
+{% set valid_hosts = groups[fabric_group] | map('regex_replace', '\\..*$', '') | list %}
+{% for host in groups[fabric_group] | sort %}
+{% set short_host = host.split('.')[0] %}
+{% set host_cfg = hostvars[host]['avd_structured_config'] %}
+{% if host_cfg.ethernet_interfaces is defined %}
+{% for eth in host_cfg.ethernet_interfaces %}
+{% if '.' not in eth.name and eth.peer is defined and eth.peer_interface is defined %}
+{% set short_peer = eth.peer.split('.')[0] %}
+{% if short_peer in valid_hosts %}
+{% set local_ep = short_host ~ ':' ~ (eth.name | replace('Ethernet', 'eth') | replace('/', '_')) %}
+{% set remote_ep = short_peer ~ ':' ~ (eth.peer_interface | replace('Ethernet', 'eth') | replace('/', '_')) %}
+{% set link_pair = [local_ep, remote_ep] | sort %}
+{% if link_pair not in ns.seen_links %}
+{% set _ = ns.seen_links.append(link_pair) %}
+    - endpoints: ["{{ link_pair[0] }}", "{{ link_pair[1] }}"]
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}

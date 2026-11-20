@@ -39,7 +39,7 @@ ethernet_interfaces:
     enabled: true
     mode: trunk
     trunk:
-      allowed_vlan: 11-12
+      allowed_vlan: 11-13
       native_vlan: 4092
 hostname: dc1-leaf1c
 ip_domain_lookup:
@@ -93,7 +93,7 @@ port_channel_interfaces:
     enabled: true
     mode: trunk
     trunk:
-      allowed_vlan: 11-12
+      allowed_vlan: 11-13
 service_routing_protocols_model: multi-agent
 spanning_tree:
   mode: mstp
@@ -118,6 +118,11 @@ vlans:
     - TENANT1
 - id: 12
   name: VRF10_VLAN12
+  metadata:
+    tenants:
+    - TENANT1
+- id: 13
+  name: VRF11_VLAN13
   metadata:
     tenants:
     - TENANT1

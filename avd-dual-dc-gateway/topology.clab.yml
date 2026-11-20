@@ -1,0 +1,84 @@
+name: FABRIC
+mgmt:
+  network: clab-mgmt
+  ipv4-subnet: 172.20.20.0/24
+
+topology:
+  kinds:
+    arista_ceos:
+      image: ceos:4.32.0F
+  nodes:
+    dc1-borderleaf1:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.105
+      startup-config: intended/configs/dc1-borderleaf1.cfg
+    dc1-leaf1a:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.101
+      startup-config: intended/configs/dc1-leaf1a.cfg
+    dc1-leaf1b:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.102
+      startup-config: intended/configs/dc1-leaf1b.cfg
+    dc1-leaf1c:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.111
+      startup-config: intended/configs/dc1-leaf1c.cfg
+    dc1-leaf2a:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.103
+      startup-config: intended/configs/dc1-leaf2a.cfg
+    dc1-leaf2b:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.104
+      startup-config: intended/configs/dc1-leaf2b.cfg
+    dc1-leaf2c:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.112
+      startup-config: intended/configs/dc1-leaf2c.cfg
+    dc1-spine1:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.11
+      startup-config: intended/configs/dc1-spine1.cfg
+    dc1-spine2:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.12
+      startup-config: intended/configs/dc1-spine2.cfg
+    dc2-borderleaf1:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.205
+      startup-config: intended/configs/dc2-borderleaf1.cfg
+    dc2-leaf1a:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.201
+      startup-config: intended/configs/dc2-leaf1a.cfg
+    dc2-leaf1b:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.202
+      startup-config: intended/configs/dc2-leaf1b.cfg
+    dc2-leaf1c:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.211
+      startup-config: intended/configs/dc2-leaf1c.cfg
+    dc2-leaf2a:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.203
+      startup-config: intended/configs/dc2-leaf2a.cfg
+    dc2-leaf2b:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.204
+      startup-config: intended/configs/dc2-leaf2b.cfg
+    dc2-leaf2c:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.212
+      startup-config: intended/configs/dc2-leaf2c.cfg
+    dc2-spine1:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.21
+      startup-config: intended/configs/dc2-spine1.cfg
+    dc2-spine2:
+      kind: arista_ceos
+      mgmt-ipv4: 172.20.96.22
+      startup-config: intended/configs/dc2-spine2.cfg
+
+  links:

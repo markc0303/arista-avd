@@ -13,7 +13,7 @@ servers:
         # Device names where the server ports are connected.
         switches: [dc1-leaf1c]
         # VLANs that will be configured on these ports.
-        vlans: 11-12
+        vlans: 11-13
         # Native VLAN to be used on these ports.
         native_vlan: 4092
         # L2 mode of the port.
@@ -33,7 +33,7 @@ servers:
         # Device names where the server ports are connected.
         switches: [dc2-leaf1c]
         # VLANs that will be configured on these ports.
-        vlans: 11-12
+        vlans: 11-13
         # Native VLAN to be used on these ports.
         native_vlan: 4092
         # L2 mode of the port.
@@ -41,5 +41,4 @@ servers:
         # Spanning tree portfast configuration on this port.
         spanning_tree_portfast: edge
         # Definition of the pair of ports as port channel.
-        
-   
+      

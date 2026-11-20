@@ -236,6 +236,7 @@ vlan internal order ascending range 1006 1199
 | ------- | ---- | ------------ |
 | 11 | VRF10_VLAN11 | - |
 | 12 | VRF10_VLAN12 | - |
+| 13 | VRF11_VLAN13 | - |
 
 ### VLANs Device Configuration
 
@@ -246,6 +247,9 @@ vlan 11
 !
 vlan 12
    name VRF10_VLAN12
+!
+vlan 13
+   name VRF11_VLAN13
 ```
 
 ## Interfaces
@@ -309,6 +313,7 @@ interface Ethernet49
 | Loopback0 | ROUTER_ID | default | 10.255.201.8/32 |
 | Loopback1 | VXLAN_TUNNEL_SOURCE | default | 10.255.202.8/32 |
 | Loopback10 | DIAG_VRF_VRF10 | VRF10 | 10.255.10.8/32 |
+| Loopback11 | DIAG_VRF_VRF11 | VRF11 | 10.255.11.8/32 |
 
 ##### IPv6
 
@@ -317,6 +322,7 @@ interface Ethernet49
 | Loopback0 | ROUTER_ID | default | - |
 | Loopback1 | VXLAN_TUNNEL_SOURCE | default | - |
 | Loopback10 | DIAG_VRF_VRF10 | VRF10 | - |
+| Loopback11 | DIAG_VRF_VRF11 | VRF11 | - |
 
 #### Loopback Interfaces Device Configuration
 
@@ -337,6 +343,12 @@ interface Loopback10
    no shutdown
    vrf VRF10
    ip address 10.255.10.8/32
+!
+interface Loopback11
+   description DIAG_VRF_VRF11
+   no shutdown
+   vrf VRF11
+   ip address 10.255.11.8/32
 ```
 
 ### VLAN Interfaces
@@ -347,6 +359,7 @@ interface Loopback10
 | --------- | ----------- | --- | --- | -------- |
 | Vlan11 | VRF10_VLAN11 | VRF10 | - | False |
 | Vlan12 | VRF10_VLAN12 | VRF10 | - | False |
+| Vlan13 | VRF11_VLAN13 | VRF11 | - | False |
 
 ##### IPv4
 
@@ -354,6 +367,7 @@ interface Loopback10
 | --------- | --- | ---------- | ------------------ | ------------------------- | ------ | ------- |
 | Vlan11 | VRF10 | - | 10.10.11.1/24 | - | - | - |
 | Vlan12 | VRF10 | - | 10.10.12.1/24 | - | - | - |
+| Vlan13 | VRF11 | - | 192.2.13.1/24 | - | - | - |
 
 #### VLAN Interfaces Device Configuration
 
@@ -370,6 +384,12 @@ interface Vlan12
    no shutdown
    vrf VRF10
    ip address virtual 10.10.12.1/24
+!
+interface Vlan13
+   description VRF11_VLAN13
+   no shutdown
+   vrf VRF11
+   ip address virtual 192.2.13.1/24
 ```
 
 ### VXLAN Interface
@@ -387,12 +407,14 @@ interface Vlan12
 | ---- | --- | ---------- | --------------- |
 | 11 | 10011 | - | - |
 | 12 | 10012 | - | - |
+| 13 | 10013 | - | - |
 
 ##### VRF to VNI and Multicast Group Mappings
 
 | VRF | VNI | Overlay Multicast Group to Encap Mappings |
 | --- | --- | ----------------------------------------- |
 | VRF10 | 10 | - |
+| VRF11 | 11 | - |
 
 #### VXLAN Interface Device Configuration
 
@@ -404,7 +426,9 @@ interface Vxlan1
    vxlan udp-port 4789
    vxlan vlan 11 vni 10011
    vxlan vlan 12 vni 10012
+   vxlan vlan 13 vni 10013
    vxlan vrf VRF10 vni 10
+   vxlan vrf VRF11 vni 11
 ```
 
 ## Routing
@@ -440,6 +464,7 @@ ip virtual-router mac-address 00:1c:73:00:00:bb
 | default | True |
 | MGMT | True |
 | VRF10 | True |
+| VRF11 | True |
 
 #### IP Routing Device Configuration
 
@@ -448,6 +473,7 @@ ip virtual-router mac-address 00:1c:73:00:00:bb
 ip routing
 ip routing vrf MGMT
 ip routing vrf VRF10
+ip routing vrf VRF11
 ```
 
 ### IPv6 Routing
@@ -459,6 +485,7 @@ ip routing vrf VRF10
 | default | False |
 | MGMT | False |
 | VRF10 | False |
+| VRF11 | False |
 
 ### Static Routes
 
@@ -547,8 +574,6 @@ ASN Notation: asplain
 | Settings | Value |
 | -------- | ----- |
 | Remote Domain Peer Groups | EVPN-OVERLAY-CORE |
-| L3 Gateway Configured | True |
-| L3 Gateway Inter-domain | True |
 
 #### Router BGP VLANs
 
@@ -556,12 +581,14 @@ ASN Notation: asplain
 | ---- | ------------------- | ----------------- | ------------------- | ------------------- | ------------ |
 | 11 | 10.255.201.8:10011 | 10011:10011<br>remote 10011:10011 | - | - | learned |
 | 12 | 10.255.201.8:10012 | 10012:10012<br>remote 10012:10012 | - | - | learned |
+| 13 | 10.255.201.8:10013 | 10013:10013<br>remote 10013:10013 | - | - | learned |
 
 #### Router BGP VRFs
 
 | VRF | Route-Distinguisher | Redistribute | Graceful Restart |
 | --- | ------------------- | ------------ | ---------------- |
-| VRF10 | 10.255.201.8:10 | connected | - |
+| VRF10 | 10.255.201.8:10 (Remote Domain: 10.255.201.8:10) | connected | - |
+| VRF11 | 10.255.201.8:11 (Remote Domain: 10.255.201.8:11) | connected | - |
 
 #### Router BGP Device Configuration
 
@@ -622,11 +649,17 @@ router bgp 65222
       route-target import export evpn domain remote 10012:10012
       redistribute learned
    !
+   vlan 13
+      rd 10.255.201.8:10013
+      rd evpn domain remote 10.255.201.8:10013
+      route-target both 10013:10013
+      route-target import export evpn domain remote 10013:10013
+      redistribute learned
+   !
    address-family evpn
       neighbor EVPN-OVERLAY-CORE activate
       neighbor EVPN-OVERLAY-CORE domain remote
       neighbor EVPN-OVERLAY-PEERS activate
-      neighbor default next-hop-self received-evpn-routes route-type ip-prefix inter-domain
    !
    address-family ipv4
       no neighbor EVPN-OVERLAY-CORE activate
@@ -634,9 +667,16 @@ router bgp 65222
       neighbor IPv4-UNDERLAY-PEERS activate
    !
    vrf VRF10
-      rd 10.255.201.8:10
-      route-target import evpn 10:10
-      route-target export evpn 10:10
+      rd evpn domain all 10.255.201.8:10
+      route-target import evpn domain all 10:10
+      route-target export evpn domain all 10:10
+      router-id 10.255.201.8
+      redistribute connected
+   !
+   vrf VRF11
+      rd evpn domain all 10.255.201.8:11
+      route-target import evpn domain all 11:11
+      route-target export evpn domain all 11:11
       router-id 10.255.201.8
       redistribute connected
 ```
@@ -722,6 +762,7 @@ route-map RM-CONN-2-BGP permit 10
 | -------- | ---------- |
 | MGMT | enabled |
 | VRF10 | enabled |
+| VRF11 | enabled |
 
 ### VRF Instances Device Configuration
 
@@ -730,6 +771,8 @@ route-map RM-CONN-2-BGP permit 10
 vrf instance MGMT
 !
 vrf instance VRF10
+!
+vrf instance VRF11
 ```
 
 ## Virtual Source NAT
@@ -739,12 +782,14 @@ vrf instance VRF10
 | Source NAT VRF | Source NAT IPv4 Address | Source NAT IPv6 Address |
 | -------------- | ----------------------- | ----------------------- |
 | VRF10 | 10.255.10.8 | - |
+| VRF11 | 10.255.11.8 | - |
 
 ### Virtual Source NAT Configuration
 
 ```eos
 !
 ip address virtual source-nat vrf VRF10 address 10.255.10.8
+ip address virtual source-nat vrf VRF11 address 10.255.11.8
 ```
 
 ## EOS CLI Device Configuration

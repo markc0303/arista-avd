@@ -223,6 +223,7 @@ vlan internal order ascending range 1006 1199
 | ------- | ---- | ------------ |
 | 11 | VRF10_VLAN11 | - |
 | 12 | VRF10_VLAN12 | - |
+| 13 | VRF11_VLAN13 | - |
 
 ### VLANs Device Configuration
 
@@ -233,6 +234,9 @@ vlan 11
 !
 vlan 12
    name VRF10_VLAN12
+!
+vlan 13
+   name VRF11_VLAN13
 ```
 
 ## Interfaces
@@ -245,9 +249,9 @@ vlan 12
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | Channel-Group |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | ------------- |
-| Ethernet1 | L2_dc2-leaf1a_Ethernet8 | *trunk | *11-12 | *- | *- | 1 |
-| Ethernet2 | L2_dc2-leaf1b_Ethernet8 | *trunk | *11-12 | *- | *- | 1 |
-| Ethernet5 | SERVER_dc2-leaf1-server1_PCI1 | trunk | 11-12 | 4092 | - | - |
+| Ethernet1 | L2_dc2-leaf1a_Ethernet8 | *trunk | *11-13 | *- | *- | 1 |
+| Ethernet2 | L2_dc2-leaf1b_Ethernet8 | *trunk | *11-13 | *- | *- | 1 |
+| Ethernet5 | SERVER_dc2-leaf1-server1_PCI1 | trunk | 11-13 | 4092 | - | - |
 
 *Inherited from Port-Channel Interface
 
@@ -269,7 +273,7 @@ interface Ethernet5
    description SERVER_dc2-leaf1-server1_PCI1
    no shutdown
    switchport trunk native vlan 4092
-   switchport trunk allowed vlan 11-12
+   switchport trunk allowed vlan 11-13
    switchport mode trunk
    switchport
    spanning-tree portfast
@@ -283,7 +287,7 @@ interface Ethernet5
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | LACP Fallback Timeout | LACP Fallback Mode | MLAG ID | EVPN ESI |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | --------------------- | ------------------ | ------- | -------- |
-| Port-Channel1 | L2_DC2_L3_LEAF1_Port-Channel8 | trunk | 11-12 | - | - | - | - | - | - |
+| Port-Channel1 | L2_DC2_L3_LEAF1_Port-Channel8 | trunk | 11-13 | - | - | - | - | - | - |
 
 #### Port-Channel Interfaces Device Configuration
 
@@ -292,7 +296,7 @@ interface Ethernet5
 interface Port-Channel1
    description L2_DC2_L3_LEAF1_Port-Channel8
    no shutdown
-   switchport trunk allowed vlan 11-12
+   switchport trunk allowed vlan 11-13
    switchport mode trunk
    switchport
 ```
